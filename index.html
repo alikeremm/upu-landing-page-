@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>upu.io</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        (() => {
+            try {
+                const savedTheme = localStorage.getItem('upu-theme');
+                const useDarkTheme = savedTheme === 'dark';
+
+                if (useDarkTheme) document.documentElement.classList.add('dark-theme');
+            } catch (_) {}
+        })();
+    </script>
 </head>
 <body>
 
@@ -15,16 +25,74 @@
     </div>
  
 
-        <nav class="nav-links">
-            <a href="#home">Home</a> 
-            <a href="#solutions">Solutions</a>
-            <a href="#why-upu">Why upu?</a>
-            <a href="#products">Products</a>
-            <a href="#contact">Contact</a>
-        </nav>
+<nav class="nav-links">
+    <a href="#home">Home</a>
+
+    <div class="dropdown">
+        <a href="#solutions" class="dropdown-link">Solutions</a>
+
+        <div class="dropdown-menu">
+
+    <div class="submenu">
+        <a href="#upu-machine">upu.machine ▸</a>
+
+        <div class="submenu-content">
+            <a href="#machine-twin">Machine Twin</a>
+            <a href="#upu-kpi">upu.kpi</a>
+            <a href="#upu-energy">upu.energy</a>
+            <a href="#upu-loss">upu.loss</a>
+            <a href="#upu-report">upu.report</a>
+            <a href="#upu-shift">upu.shift</a>
+            <a href="#upu-ccount">upu.c-count</a>
+        </div>
+    </div>
+
+    <div class="dropdown-sub">
+    <a href="#upu-person">
+    upu.person ▸
+    </a>
+
+    <div class="dropdown-sub-menu">
+        <a href="#person-twin">Person Twin</a>
+        <a href="#upu-point">upu.point</a>
+        <a href="#upu-message">upu.message</a>
+        <a href="#upu-notify">upu.notify</a>
+        <a href="#upu-task">upu.task</a>
+        <a href="#upu-talent">upu.talent</a>
+        <a href="#upu-attend">upu.attend</a>
+        <a href="#upu-poll">upu.poll</a>
+    </div>
+</div>
+    
+    <div class="dropdown-sub">
+    <a href="#production-package">
+        upu.product ▸
+    </a>
+
+    <div class="dropdown-sub-menu">
+        <a href="#production-package">Production Package</a>
+        <a href="#upu-twin">upu.twin</a>
+        <a href="#upu-order">upu.order</a>
+        <a href="#upu-plan">upu.plan</a>
+        <a href="#upu-supply">upu.supply</a>
+        <a href="#upu-quality">upu.quality</a>
+        <a href="#upu-stock">upu.stock</a>
+        <a href="#upu-api">upu.api</a>
+    </div>
+</div>
+
+</div>
+    </div>
+
+    <a href="#why-upu">Why upu?</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+</nav>
 
         <div   class="nav-right">
-
+            <button class="theme-toggle" type="button" aria-label="Koyu modu aç" aria-pressed="false" title="Koyu modu aç">
+                <span class="theme-toggle-icon" aria-hidden="true">&#9790;</span>
+            </button>
             <button class="login-btn">Login</button>
 
         </div>
@@ -363,7 +431,7 @@
     </div>
 </section>
 
-<section class="products-section">
+<section class="products-section" id="products">
 
     <div class="products-header">
         <h2>Products</h2>
@@ -1015,7 +1083,7 @@
 
 </section>
 
-<section class="upu-task-section">
+<section class="upu-task-section" id="upu-task">
   
   <div class="task-header-divider">
     <h2>upu.<span>task</span></h2>
@@ -1043,7 +1111,7 @@
   </div>
 </section>
 
-<section class="upu-message-section">
+<section class="upu-message-section" id="upu-message">
   
   <div class="message-header-divider">
     <h2>upu.<span>message</span></h2>
@@ -1071,7 +1139,7 @@
   </div>
 </section>
 
-<section class="upu-notify-section">
+<section class="upu-notify-section" id="upu-notify">
   
   <div class="notify-header-divider">
     <h2>upu.<span>notify</span></h2>
@@ -1099,7 +1167,7 @@
   </div>
 </section>
 
-<section class="upu-talent-section">
+<section class="upu-talent-section" id="upu-talent">
   
   <div class="talent-header-divider">
     <h2>upu.<span>talent</span></h2>
@@ -1127,7 +1195,7 @@
   </div>
 </section>
 
-<section class="upu-attend-section">
+<section class="upu-attend-section" id="upu-attend">
   
   <div class="attend-header-divider">
     <h2>upu.<span>attend</span></h2>
@@ -1155,7 +1223,7 @@
   </div>
 </section>
 
-<section class="upu-poll-section">
+<section class="upu-poll-section" id="upu-poll">
   
   <div class="poll-header-divider">
     <h2>upu.<span>poll</span></h2>
@@ -1183,6 +1251,358 @@
   </div>
 </section>
 
+<section class="production-package-section" id="production-package">
+  <div class="production-package-header">
+    <h1 class="upu-product-title">
+  <span class="brand-prefix">upu.</span><span class="brand-name">product</span>
+</h1>
+    <h2>Production Management Package</h2>
+    <p>You will be able to take advantage of all of upu.io's features, which cover every aspect of your production and include production tracking, supply management, and cost analysis.</p>
+  </div>
+
+  <div class="production-package-content">
+    
+    <div class="production-features-wrapper">
+      <div class="production-features-grid">
+        
+        <div class="production-feature-box">
+          <div class="production-feature-icon">
+            <img src="https://cdn.upu.io/assets/OrderNew.svg" alt="Product Twin">
+          </div>
+          <div class="production-feature-info">
+            <h4>Product Twin</h4>
+            <p>Work in Process</p>
+          </div>
+        </div>
+
+        <div class="production-feature-box">
+          <div class="production-feature-icon">
+            <img src="upu.plan.png" alt="upu.plan">
+          </div>
+          <div class="production-feature-info">
+            <h4>upu.<span>plan</span></h4>
+            <p>Product Planning</p>
+          </div>
+        </div>
+
+        <div class="production-feature-box">
+          <div class="production-feature-icon">
+            <img src="upu.order.png" alt="upu.order">
+          </div>
+          <div class="production-feature-info">
+            <h4>upu.<span>order</span></h4>
+            <p>Order Management Solution</p>
+          </div>
+        </div>
+
+        <div class="production-feature-box">
+          <div class="production-feature-icon">
+            <img src="https://cdn.upu.io/assets/Quality.svg" alt="upu.quality">
+          </div>
+          <div class="production-feature-info">
+            <h4>upu.<span>quality</span></h4>
+            <p>Quality Operations Management</p>
+          </div>
+        </div>
+
+        <div class="production-feature-box">
+          <div class="production-feature-icon">
+            <img src="https://cdn.upu.io/assets/Supply.svg" alt="upu.supply">
+          </div>
+          <div class="production-feature-info">
+            <h4>upu.<span>supply</span></h4>
+            <p>Supply Management Solution</p>
+          </div>
+        </div>
+
+        <div class="production-feature-box">
+          <div class="production-feature-icon">
+            <img src="https://cdn.upu.io/assets/stockIconProduct.svg" alt="upu.stock">
+          </div>
+          <div class="production-feature-info">
+            <h4>upu.<span>stock</span></h4>
+            <p>Stock Management Solution</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="production-api-wrapper">
+        <div class="production-feature-box production-api-box">
+          <div class="production-feature-icon">
+            <img src="https://cdn.upu.io/assets/Api.svg" alt="upu.api">
+          </div>
+          <div class="production-feature-info">
+            <h4>upu.<span>api</span></h4>
+            <p>API Service</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="production-hero-image">
+      <img src="https://cdn.upu.io/assets/Product.svg" alt="Production Management Package Illustration">
+    </div>
+
+  </div>
+</section>
+
+<section class="twin-section" id="upu-twin">
+
+  <div class="twin-header">
+    <h2>Product Twin (WIP)</h2>
+  </div>
+
+  <div class="twin-content">
+    <div class="twin-media">
+      <img src="https://www.upu.io/static/media/productTwins.0ac2e428576c5cac0fbd.png" alt="upu.product Twin Dashboard Macbook">
+    </div>
+
+    <div class="twin-right-wrapper">
+      <div class="twin-info-card">
+        <h3>Product Twin Solution (WIP)</h3>
+        <p>By digitizing your production process with the Kanban method, you can monitor all your operations step by step. With the Product Twin, you can control your production line processes in real time and enhance your production efficiency.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="order-section" id="upu-order">
+
+  <div class="order-header">
+    <h2>upu.<span>order</span></h2>
+  </div>
+
+  <div class="order-content">
+    <div class="order-media">
+      <img src="https://www.upu.io/static/media/productOrder.def12a121aadc3cef9d2.png" alt="upu.product Order Dashboard Macbook">
+    </div>
+
+    <div class="order-right-wrapper">
+      <div class="order-info-card">
+        <h3>Order Management Solution</h3>
+        <p>All the processes from order to delivery of your products are prepared for end-to-end smart manufacturing with the kanban method and our enhanced solution.</p>
+      </div>
+
+      <div class="order-illustration">        
+          <img src="https://cdn.upu.io/assets/order.png" alt="Order Management Illustration">
+        </div>        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="plan-section" id="upu-plan">
+
+  <div class="plan-header">
+    <h2>upu.<span>plan</span></h2>
+  </div>
+
+  <div class="plan-content">
+    <div class="plan-media">
+      <img src="https://www.upu.io/static/media/planningImage1.a557f18ef8c289939d35.png" alt="upu.product Plan Dashboard MacBook ">
+    </div>
+
+    <div class="plan-right-wrapper">
+      <div class="plan-info-card">
+        <h3>Production Planning Solution</h3>
+        <p>You can schedule products from opened orders for specific operations and assign the machines involved in those operations. By organizing your production processes step by step, you can enhance operational efficiency and make better use of your resources.</p>
+      </div>
+
+      <div class="plan-illustration">
+        <img src="https://www.upu.io/static/media/planningImage.0d55898ce9556154b077.png" alt="Production Plan Illustration">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="supply-section" id="upu-supply">
+
+  <div class="supply-header">
+    <h2>upu.<span>supply</span></h2>    
+  </div>
+
+  <div class="supply-content">
+    <div class="supply-media">
+      <img src="https://www.upu.io/static/media/productSupply.f735669b9d4b44885b82.png" alt="upu.product Supply Dashboard Macbook">
+    </div>
+
+    <div class="supply-right-wrapper">
+      <div class="supply-info-card">
+        <h3>Supply Management Solution</h3>
+        <p>It digitizes your procurement processes in every aspect and seamlessly integrates your suppliers into your digital smart manufacturing processes.</p>
+      </div>
+
+
+      <div class="supply-illustration">
+        <img src="https://cdn.upu.io/assets/supplyTwo.png" alt="Supply Illustration">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quality-section" id="upu-quality">
+
+  <div class="quality-header">
+    <h2>upu.<span>quality</span></h2>
+  </div>
+
+  <div class="quality-content">
+    <div class="quality-media">
+      <img src="https://www.upu.io/static/media/productQuality.0fc09c310c4295f5b4ee.png" alt="upu.product Quality Dashboard Macbook">
+    </div>
+
+    <div class="quality-right-wrapper">
+      <div class="quality-info-card">
+        <h3>Quality Operations Management</h3>
+        <p>All quality control processes of your manufacturing operations are digitized and tracked. Your quality control data is automatically stored and analyzed on a product-centric basis.</p>
+      </div>
+
+
+      <div class="quality-illustration">
+        <img src="https://cdn.upu.io/assets/qualityTwo.png" alt="Quality Illustration">
+      </div>
+    </div>  
+  </div>
+</section>
+
+<section class="stock-section" id="upu-stock">
+
+  <div class="stock-header">
+    <h2>upu.<span>stock</span></h2>
+  </div>
+
+  <div class="stock-content">
+    <div class="stock-media">
+      <img src="https://www.upu.io/static/media/productStock.f6be2d399c2fb51c4600.png" alt="upu.product Stock Dashboard MacBook">
+    </div>
+
+
+    <div class="stock-right-wrapper">
+      <div class="stock-info-card">
+        <h3>Stock Management Solution</h3>
+        <p>It digitizes your active inventory control. Real-time tracking of inventory and intermediate products is possible.</p>
+      </div>
+
+      <div class="stock-illustration">
+        <img src="https://cdn.upu.io/assets/stockTwo.png" alt="Stock Illustration">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="api-section" id="upu-api">
+
+
+  <div class="api-header">
+    <h2>upu.<span>api</span></h2>
+  </div>
+
+  <div class="api-content">
+    <div class="api-media">
+      <img src="https://cdn.upu.io/assets/api.png" alt="api left illustration">
+    </div>
+
+    <div class="api-right-wrapper">
+      <div class="api-info-card">
+        <h3>API Service</h3>
+        <p>The infrastructure that will improve compatibility with all ERP and business process software is available to customers through upu.io.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story-section" id="contact">
+
+  <div class="story-content">
+
+    <div class="story-media">
+      <img src="https://cdn.upu.io/assets/FooterBird.svg" alt="upu bird illustration">
+    </div>
+
+    <div class="story-right-wrapper">
+
+      <div class="story-header">
+        <h2>The Story of <strong>upu.<span>io</span></strong>
+        </h2>
+      </div>
+
+      <div class="story-text">
+        <p>
+          upu.io is a cloud-based next-generation cyber-physical production management
+          platform that will revolutionize your production and change your perspective
+          on manufacturing. It provides end-to-end smart manufacturing solutions to
+          digitize your production process.
+        </p>
+
+        <p>
+          The name upu.io is derived from the hoopoe bird, the sole member of the
+          Upupidae family in the Coraciiformes order. Known for its distinctive crest
+          and unique vocalizations, this bird is a rare species with historical
+          significance. Throughout history, the beautiful hoopoe has been considered
+          sacred in various traditional sources and is recognized as the messenger bird
+          of King Solomon. We envision upu.io as a messenger that effectively
+          communicates everything to executives, much like Solomon, even if they may not
+          speak the language of 'bird' (data). The '.io' signifies the digital dual
+          direction of data (input and output) within our platform.
+        </p>
+      </div>
+
+      <div class="story-contact-wrapper">
+
+        <div class="story-contact-item">
+          <h4>Website</h4>
+          <p>upu.io</p>
+          <p>upu@upu.io</p>
+          <p>satis@upu.io</p>
+        </div>
+
+        <div class="story-contact-item">
+          <h4>R&amp;D Office</h4>
+          <p>Teknopark Ankara 2224. Cd. No:1 / F-214</p>
+          <p>F-215 Yenimahalle/Ankara/Türkiye</p>
+        </div>
+
+        <div class="story-contact-item">
+          <h4>Headquarter</h4>
+          <p>Astor Plaza Turgut Ozal Mah.1953</p>
+          <p>No:22A/B/C Yenimahalle/Ankara/Türkiye</p>
+        </div>
+
+      </div>
+
+      <div class="story-socials">
+
+    <a href="https://x.com/upu_io">
+        <img src="https://cdn.upu.io/assets/TwitterIconNew.svg" alt="X">
+    </a>
+
+    <a href="https://www.instagram.com/upu_io/">
+        <img src="https://cdn.upu.io/assets/InstagramIconNew.svg" alt="Instagram">
+    </a>
+
+    <a href="https://www.youtube.com/channel/UCum-NqVQpiIHkSdxYLVxsjQ">
+        <img src="https://cdn.upu.io/assets/YoutubeIcon.svg" alt="YouTube">
+    </a>
+
+    <a href="https://www.facebook.com/profile.php?id=61550730645804">
+        <img src="https://cdn.upu.io/assets/Facebook.svg" alt="Facebook">
+    </a>
+
+    <a href="https://www.linkedin.com/company/upu-io">
+        <img src="https://cdn.upu.io/assets/Linkedin.svg" alt="LinkedIn">
+    </a>
+
+</div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 
@@ -1193,34 +1613,29 @@
 
 
 
+    <script>
+        (() => {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIcon = themeToggle.querySelector('.theme-toggle-icon');
 
+            function updateThemeToggle() {
+                const isDarkTheme = document.documentElement.classList.contains('dark-theme');
+                themeToggle.setAttribute('aria-pressed', String(isDarkTheme));
+                themeToggle.setAttribute('aria-label', isDarkTheme ? 'Açık modu aç' : 'Koyu modu aç');
+                themeToggle.title = isDarkTheme ? 'Açık modu aç' : 'Koyu modu aç';
+                themeIcon.innerHTML = isDarkTheme ? '&#9728;' : '&#9790;';
+            }
 
+            themeToggle.addEventListener('click', () => {
+                const isDarkTheme = document.documentElement.classList.toggle('dark-theme');
+                try {
+                    localStorage.setItem('upu-theme', isDarkTheme ? 'dark' : 'light');
+                } catch (_) {}
+                updateThemeToggle();
+            });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            updateThemeToggle();
+        })();
+    </script>
 </body>
 </html>
