@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upu.io - onboarding / kayıt ol</title>
+    
+    <!-- Google Fonts (Inter / Outfit) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+    <!-- Onboarding Ana Konteyneri -->
+    <main class="onboarding-wrapper">
+        
+        <!-- Üst Adım Barı (Doğrudan images/ Klasöründeki SVG Kartları) -->
+        <header class="progress-header">
+            <div class="steps-container" id="stepsBar">
+                
+                <!-- 1. ADIM: Language (Aktif) -->
+                <div class="step-item active" data-step="1">
+                    <img src="images/State=Current, Step Type=Language.svg" alt="Language" class="step-figma-svg">
+                </div>
+
+                <!-- 2. ADIM: Company -->
+                <div class="step-item" data-step="2">
+                    <img src="images/State=Incomplete, Step Type=Company.svg" alt="Company" class="step-figma-svg">
+                </div>
+
+                <!-- 3. ADIM: Departments -->
+                <div class="step-item" data-step="3">
+                    <img src="images/State=Incomplete, Step Type=Department.svg" alt="Departments" class="step-figma-svg">
+                </div>
+
+                <!-- 4. ADIM: Personnels -->
+                <div class="step-item" data-step="4">
+                    <img src="images/State=Incomplete, Step Type=Personnel.svg" alt="Personnels" class="step-figma-svg">
+                </div>
+
+                <!-- 5. ADIM: Internal Op. -->
+                <div class="step-item" data-step="5">
+                    <img src="images/State=Incomplete, Step Type=Internal Op..svg" alt="Internal Op." class="step-figma-svg">
+                </div>
+
+                <!-- 6. ADIM: External Op. -->
+                <div class="step-item" data-step="6">
+                    <img src="images/State=Incomplete, Step Type=External Op..svg" alt="External Op." class="step-figma-svg">
+                </div>
+
+                <!-- 7. ADIM: Equipments -->
+                <div class="step-item" data-step="7">
+                    <img src="images/State=Incomplete, Step Type=Equipments.svg" alt="Equipments" class="step-figma-svg">
+                </div>
+
+                <!-- 8. ADIM: Shifts -->
+                <div class="step-item" data-step="8">
+                    <img src="images/State=Incomplete, Step Type=Shifts.svg" alt="Shifts" class="step-figma-svg">
+                </div>
+
+            </div>
+        </header>
+
+        <!-- Orta İçerik Alanı (Dynamic Step Content) -->
+        <section class="content-container">
+            
+            <!-- STEP 1: DİL SEÇİMİ (LANGUAGE) -->
+            <div class="step-view active" id="step-1">
+                
+                <!-- Hoşgeldiniz Başlığı -->
+                <div class="welcome-header">
+                    <h1 class="brand-welcome">
+                        <span class="brand-upu">upu.</span><span class="brand-io">io</span><span class="welcome-text">'ya hoşgeldiniz.</span>
+                    </h1>
+                    <p class="welcome-subtitle">
+                        Kaydınızı oluşturmanız ve upu.io'yu kullanabilmeniz için gerekli adımları tamamlamanız gerekmektedir. Adımları tamamlamak için uygun dili seçin ve "Başla" butonuna tıklayın.
+                    </p>
+                </div>
+
+                <!-- Dil Seçenekleri (Radio Selection) -->
+                <form class="language-selection-form" id="languageForm" onsubmit="event.preventDefault();">
+                    <div class="language-options">
+                        
+                        <!-- Türkçe Seçeneği -->
+                        <label class="lang-card active" for="lang-tr">
+                            <input type="radio" name="language" id="lang-tr" value="tr" checked>
+                            <span class="custom-radio">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.6666 3.5L5.24992 9.91667L2.33325 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <!-- Türkçe Bayrak Görseli -->
+                            <div class="flag-icon">
+                                <img src="images/TR.svg" alt="TR">
+                            </div>
+                            <span class="lang-code">TR</span>
+                        </label>
+
+                        <!-- İngilizce Seçeneği -->
+                        <label class="lang-card" for="lang-en">
+                            <input type="radio" name="language" id="lang-en" value="en">
+                            <span class="custom-radio">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.6666 3.5L5.24992 9.91667L2.33325 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <!-- İngilizce Bayrak Görseli -->
+                            <div class="flag-icon">
+                                <img src="images/GB.svg" alt="EN">
+                            </div>
+                            <span class="lang-code">EN</span>
+                        </label>
+
+                    </div>
+
+                    <!-- Aksiyon Butonu -->
+                    <div class="action-button-wrapper">
+                        <button type="button" class="btn-primary" id="btnNextStep">
+                            <span>Başla</span>
+                            <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- STEP 2: FİRMA OLUŞTUR (COMPANY FORM) -->
+            <div class="step-view" id="step-2">
+                
+                <!-- Başlık -->
+                <div class="company-form-header">
+                    <h1 class="step-title">Firma Oluştur</h1>
+                </div>
+
+                <!-- 3 Kolonlu Firma Oluşturma Formu -->
+                <form class="company-form" id="companyForm" onsubmit="event.preventDefault();">
+                    <div class="company-form-grid">
+                        
+                        <!-- KOLON 1 -->
+                        <div class="form-column">
+                            <!-- Logo Yükleme -->
+                            <div class="form-group logo-upload-group">
+                                <label class="input-label">Firma Logosu</label>
+                                <div class="logo-upload-box" id="logoUploadBox">
+                                    <input type="file" id="logoFileInput" accept="image/*" style="display: none;">
+                                    <div class="logo-plus-icon" id="logoPreviewBox">+</div>
+                                    <div class="logo-text-wrapper">
+                                        <span class="logo-title" id="logoTitleText">Firma Logosu</span>
+                                        <a href="#" class="logo-upload-link" id="logoUploadLink" onclick="event.preventDefault();">Resim yükle</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Firma Adı -->
+                            <div class="form-group">
+                                <label class="input-label">Firma Adı</label>
+                                <input type="text" class="form-input" placeholder="Firma Adı">
+                            </div>
+
+                            <!-- Firma Adresi -->
+                            <div class="form-group">
+                                <label class="input-label">Firma Adresi</label>
+                                <input type="text" class="form-input" placeholder="Firma Adresi">
+                            </div>
+
+                            <!-- Firma E-Posta -->
+                            <div class="form-group input-icon-group">
+                                <label class="input-label">Firma E-Posta</label>
+                                <div class="input-with-icon">
+                                    <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                                    <input type="email" class="form-input" placeholder="E-Posta">
+                                </div>
+                            </div>
+
+                            <!-- Firma Telefonu -->
+                            <div class="form-group">
+                                <label class="input-label">Firma Telefonu</label>
+                                <div class="phone-input-group">
+                                    <select class="phone-country-select">
+                                        <option value="TR">TR ∨</option>
+                                    </select>
+                                    <input type="text" class="form-input" placeholder="+(90)">
+                                </div>
+                            </div>
+
+                            <!-- Mali Yıl Başlangıç Tarihi -->
+                            <div class="form-group input-icon-group">
+                                <label class="input-label">Mali Yıl Başlangıç Tarihi</label>
+                                <div class="input-with-icon">
+                                    <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                    <input type="text" class="form-input" placeholder="Firma Adresi">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KOLON 2 -->
+                        <div class="form-column">
+                            <!-- Yetkili Adı -->
+                            <div class="form-group">
+                                <label class="input-label">Yetkili Adı</label>
+                                <input type="text" class="form-input" placeholder="Firma Adı">
+                            </div>
+
+                            <!-- Yetkili E-Posta -->
+                            <div class="form-group input-icon-group">
+                                <label class="input-label">Yetkili E-Posta</label>
+                                <div class="input-with-icon">
+                                    <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                                    <input type="email" class="form-input" placeholder="E-Posta">
+                                </div>
+                            </div>
+
+                            <!-- Yetkili Telefonu -->
+                            <div class="form-group">
+                                <label class="input-label">Yetkili Telefonu</label>
+                                <div class="phone-input-group">
+                                    <select class="phone-country-select">
+                                        <option value="TR">TR ∨</option>
+                                    </select>
+                                    <input type="text" class="form-input" placeholder="+(90)">
+                                </div>
+                            </div>
+
+                            <!-- Vergi Dairesi -->
+                            <div class="form-group">
+                                <label class="input-label">Vergi Dairesi</label>
+                                <input type="text" class="form-input" placeholder="Vergi Dairesi">
+                            </div>
+
+                            <!-- Vergi Numarası -->
+                            <div class="form-group">
+                                <label class="input-label">Vergi Numarası</label>
+                                <input type="text" class="form-input" placeholder="00">
+                            </div>
+
+                            <!-- Çözüm Paketleri -->
+                            <div class="form-group">
+                                <label class="input-label">Çözüm Paketleri</label>
+                                <input type="text" class="form-input" placeholder="upu.machine, upu.product, upu.person">
+                            </div>
+                        </div>
+
+                        <!-- KOLON 3 -->
+                        <div class="form-column">
+                            <!-- Ülke -->
+                            <div class="form-group">
+                                <label class="input-label">Ülke</label>
+                                <select class="form-select">
+                                    <option value="">Firma Adresi</option>
+                                </select>
+                            </div>
+
+                            <!-- Zaman Dilimi -->
+                            <div class="form-group">
+                                <label class="input-label">Zaman Dilimi</label>
+                                <select class="form-select">
+                                    <option value="">Firma Adresi</option>
+                                </select>
+                            </div>
+
+                            <!-- Ekipman Kredisi & Personel Kredisi -->
+                            <div class="form-row-two">
+                                <div class="form-group">
+                                    <label class="input-label">Ekipman Kredisi</label>
+                                    <input type="text" class="form-input" value="42">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-label">Personel Kredisi</label>
+                                    <input type="text" class="form-input" value="124">
+                                </div>
+                            </div>
+
+                            <!-- Gün Başlangıç Saati -->
+                            <div class="form-group">
+                                <label class="input-label">Gün Başlangıç Saati</label>
+                                <select class="form-select">
+                                    <option value="">Firma Adresi</option>
+                                </select>
+                            </div>
+
+                            <!-- T1 Standart & T1 -->
+                            <div class="form-row-two">
+                                <div class="form-group">
+                                    <label class="input-label">T1 Standart</label>
+                                    <input type="text" class="form-input" placeholder="+(90)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-label">T1</label>
+                                    <input type="text" class="form-input" placeholder="+(90)">
+                                </div>
+                            </div>
+
+                            <!-- T2 & T3 -->
+                            <div class="form-row-two">
+                                <div class="form-group">
+                                    <label class="input-label">T2</label>
+                                    <input type="text" class="form-input" placeholder="+(90)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-label">T3</label>
+                                    <input type="text" class="form-input" placeholder="+(90)">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Alt Aksiyon Butonları (Önceki & Sonraki) -->
+                    <div class="form-action-buttons">
+                        <button type="button" class="btn-step-prev btn-prev">Önceki</button>
+                        <button type="button" class="btn-step-next btn-next">Sonraki</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- STEP 3: DEPARTMAN EKLE (DEPARTMENTS) -->
+            <div class="step-view" id="step-3">
+                <div class="welcome-header department-header">
+                    <h1 class="step-title">Departman Ekle</h1>
+                    <p class="welcome-subtitle">
+                        Firmanızda çalışan personelleri eklemeden önce; muhasebe, insan kaynakları, üretim gibi departmanları oluşturarak yönetim kolaylığı sağlayabilirsiniz.
+                    </p>
+                </div>
+
+                <!-- Ortadaki Geniş + Ekle Butonu -->
+                <div class="add-department-wrapper">
+                    <button type="button" class="btn-add-item" id="btnAddDepartment">
+                        <span class="plus-sign">+</span>
+                        <span>Ekle</span>
+                    </button>
+                </div>
+
+                <!-- Alt Önceki & Sonraki Butonları -->
+                <div class="form-action-buttons" style="margin-top: 48px;">
+                    <button type="button" class="btn-step-prev btn-prev">Önceki</button>
+                    <button type="button" class="btn-step-next btn-next">Sonraki</button>
+                </div>
+            </div>
+
+            <!-- STEP 4 TEMPLATE -->
+            <div class="step-view" id="step-4">
+                <div class="welcome-header">
+                    <h2>Step 4: Personnels</h2>
+                    <p class="welcome-subtitle">Personel ve kullanıcı rol tanımlamaları.</p>
+                </div>
+                <div class="action-button-wrapper flex-buttons">
+                    <button type="button" class="btn-secondary btn-prev">Geri</button>
+                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+                </div>
+            </div>
+
+            <!-- STEP 5 TEMPLATE -->
+            <div class="step-view" id="step-5">
+                <div class="welcome-header">
+                    <h2>Step 5: Internal Op.</h2>
+                    <p class="welcome-subtitle">İç operasyonlar ve süreç akışları.</p>
+                </div>
+                <div class="action-button-wrapper flex-buttons">
+                    <button type="button" class="btn-secondary btn-prev">Geri</button>
+                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+                </div>
+            </div>
+
+            <!-- STEP 6 TEMPLATE -->
+            <div class="step-view" id="step-6">
+                <div class="welcome-header">
+                    <h2>Step 6: External Op.</h2>
+                    <p class="welcome-subtitle">Dış operasyonlar ve fason süreçler.</p>
+                </div>
+                <div class="action-button-wrapper flex-buttons">
+                    <button type="button" class="btn-secondary btn-prev">Geri</button>
+                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+                </div>
+            </div>
+
+            <!-- STEP 7 TEMPLATE -->
+            <div class="step-view" id="step-7">
+                <div class="welcome-header">
+                    <h2>Step 7: Equipments</h2>
+                    <p class="welcome-subtitle">Ekipman, etiket ve donanım tanımlamaları.</p>
+                </div>
+                <div class="action-button-wrapper flex-buttons">
+                    <button type="button" class="btn-secondary btn-prev">Geri</button>
+                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+                </div>
+            </div>
+
+            <!-- STEP 8 TEMPLATE -->
+            <div class="step-view" id="step-8">
+                <div class="welcome-header">
+                    <h2>Step 8: Shifts</h2>
+                    <p class="welcome-subtitle">Vardiya planları ve çalışma saatleri düzeni.</p>
+                </div>
+                <div class="action-button-wrapper flex-buttons">
+                    <button type="button" class="btn-secondary btn-prev">Geri</button>
+                    <button type="button" class="btn-primary" onclick="alert('Onboarding başarıyla tamamlandı!');">Tamamla ✨</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Alt Bölüm: Fabrika İllüstrasyon Görseli -->
+        <footer class="factory-illustration-footer">
+            <img src="images/factory.svg" alt="Fabrika İllüstrasyonu" class="factory-illustration-img" onerror="this.src='images/Steps Illustration.svg';">
+        </footer>
+
+        <!-- Sol Alt Yüzen Butonlar (Globe & Logout) -->
+        <div class="floating-left-actions">
+            <!-- Dil Seçim Popup (Açılır Kutu) -->
+            <div class="lang-dropdown-popup" id="langPopup">
+                <div class="lang-popup-option active" data-lang="tr">
+                    <div class="flag-icon"><img src="images/TR.svg" alt="TR"></div>
+                    <span>TR</span>
+                </div>
+                <div class="lang-popup-option" data-lang="en">
+                    <div class="flag-icon"><img src="images/GB.svg" alt="EN"></div>
+                    <span>EN</span>
+                </div>
+            </div>
+
+            <button type="button" class="floating-btn globe-btn" id="globeBtn" title="Dil Değiştir">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#344054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/><path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18"/></svg>
+            </button>
+            <button type="button" class="floating-btn logout-btn" id="logoutBtn" title="Çıkış Yap" onclick="location.href='index.html';">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            </button>
+        </div>
+
+        <!-- Sağ Alt Yüzen Firma Logosu Rozeti -->
+        <div class="floating-company-badge" id="floatingCompanyBadge" style="display: none;">
+            <div class="badge-logo-box">
+                <img src="images/persontwin.png" alt="Company Logo" id="badgeLogoImg">
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Custom JavaScript -->
+    <script src="register.js"></script>
+</body>
+</html>
