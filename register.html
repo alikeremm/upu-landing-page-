@@ -74,9 +74,9 @@
                 <!-- Hoşgeldiniz Başlığı -->
                 <div class="welcome-header">
                     <h1 class="brand-welcome">
-                        <a href="index.html" style="text-decoration:none; color:inherit;"><span class="brand-upu">upu.</span><span class="brand-io">io</span></a><span class="welcome-text">'ya hoşgeldiniz.</span>
+                        <a href="index.html" style="text-decoration:none; color:inherit;"><span class="brand-upu">upu.</span><span class="brand-io">io</span></a><span class="welcome-text" data-i18n="welcome_text">'ya hoşgeldiniz.</span>
                     </h1>
-                    <p class="welcome-subtitle">
+                    <p class="welcome-subtitle" data-i18n="welcome_sub">
                         Kaydınızı oluşturmanız ve upu.io'yu kullanabilmeniz için gerekli adımları tamamlamanız gerekmektedir. Adımları tamamlamak için uygun dili seçin ve "Başla" butonuna tıklayın.
                     </p>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="language-options">
                         
                         <!-- Türkçe Seçeneği -->
-                        <label class="lang-card active" for="lang-tr">
+                        <label class="lang-card active" for="lang-tr" id="langCardTr">
                             <input type="radio" name="language" id="lang-tr" value="tr" checked>
                             <span class="custom-radio">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@
                         </label>
 
                         <!-- İngilizce Seçeneği -->
-                        <label class="lang-card" for="lang-en">
+                        <label class="lang-card" for="lang-en" id="langCardEn">
                             <input type="radio" name="language" id="lang-en" value="en">
                             <span class="custom-radio">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@
                     <!-- Aksiyon Butonu -->
                     <div class="action-button-wrapper">
                         <button type="button" class="btn-primary" id="btnNextStep">
-                            <span>Başla</span>
+                            <span data-i18n="btn_start">Başla</span>
                             <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -136,7 +136,7 @@
                 
                 <!-- Başlık -->
                 <div class="company-form-header">
-                    <h1 class="step-title">Firma Oluştur</h1>
+                    <h1 class="step-title" data-i18n="step2_title">Firma Oluştur</h1>
                 </div>
 
                 <!-- 3 Kolonlu Firma Oluşturma Formu -->
@@ -147,41 +147,41 @@
                         <div class="form-column">
                             <!-- Logo Yükleme -->
                             <div class="form-group logo-upload-group">
-                                <label class="input-label">Firma Logosu</label>
+                                <label class="input-label" data-i18n="company_logo">Firma Logosu</label>
                                 <div class="logo-upload-box" id="logoUploadBox">
                                     <input type="file" id="logoFileInput" accept="image/*" style="display: none;">
                                     <div class="logo-plus-icon" id="logoPreviewBox">+</div>
                                     <div class="logo-text-wrapper">
-                                        <span class="logo-title" id="logoTitleText">Firma Logosu</span>
-                                        <a href="#" class="logo-upload-link" id="logoUploadLink" onclick="event.preventDefault();">Resim yükle</a>
+                                        <span class="logo-title" id="logoTitleText" data-i18n="company_logo">Firma Logosu</span>
+                                        <a href="#" class="logo-upload-link" id="logoUploadLink" onclick="event.preventDefault();" data-i18n="upload_image">Resim yükle</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Firma Adı -->
                             <div class="form-group">
-                                <label class="input-label">Firma Adı</label>
-                                <input type="text" class="form-input" placeholder="Firma Adı">
+                                <label class="input-label" data-i18n="company_name">Firma Adı</label>
+                                <input type="text" class="form-input" data-i18n-placeholder="company_name" placeholder="Firma Adı">
                             </div>
 
                             <!-- Firma Adresi -->
                             <div class="form-group">
-                                <label class="input-label">Firma Adresi</label>
-                                <input type="text" class="form-input" placeholder="Firma Adresi">
+                                <label class="input-label" data-i18n="company_address">Firma Adresi</label>
+                                <input type="text" class="form-input" data-i18n-placeholder="company_address" placeholder="Firma Adresi">
                             </div>
 
                             <!-- Firma E-Posta -->
                             <div class="form-group input-icon-group">
-                                <label class="input-label">Firma E-Posta</label>
+                                <label class="input-label" data-i18n="company_email">Firma E-Posta</label>
                                 <div class="input-with-icon">
                                     <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-                                    <input type="email" class="form-input" placeholder="E-Posta">
+                                    <input type="email" class="form-input" data-i18n-placeholder="company_email" placeholder="E-Posta">
                                 </div>
                             </div>
 
                             <!-- Firma Telefonu -->
                             <div class="form-group">
-                                <label class="input-label">Firma Telefonu</label>
+                                <label class="input-label" data-i18n="company_phone">Firma Telefonu</label>
                                 <div class="phone-input-group">
                                     <select class="phone-country-select">
                                         <option value="TR">TR ∨</option>
@@ -192,10 +192,10 @@
 
                             <!-- Mali Yıl Başlangıç Tarihi -->
                             <div class="form-group input-icon-group">
-                                <label class="input-label">Mali Yıl Başlangıç Tarihi</label>
+                                <label class="input-label" data-i18n="fiscal_year_start">Mali Yıl Başlangıç Tarihi</label>
                                 <div class="input-with-icon">
                                     <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                                    <input type="text" class="form-input" placeholder="Firma Adresi">
+                                    <input type="text" class="form-input" data-i18n-placeholder="company_address" placeholder="Firma Adresi">
                                 </div>
                             </div>
                         </div>
@@ -204,22 +204,22 @@
                         <div class="form-column">
                             <!-- Yetkili Adı -->
                             <div class="form-group">
-                                <label class="input-label">Yetkili Adı</label>
-                                <input type="text" class="form-input" placeholder="Firma Adı">
+                                <label class="input-label" data-i18n="authorized_name">Yetkili Adı</label>
+                                <input type="text" class="form-input" data-i18n-placeholder="company_name" placeholder="Firma Adı">
                             </div>
 
                             <!-- Yetkili E-Posta -->
                             <div class="form-group input-icon-group">
-                                <label class="input-label">Yetkili E-Posta</label>
+                                <label class="input-label" data-i18n="authorized_email">Yetkili E-Posta</label>
                                 <div class="input-with-icon">
                                     <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-                                    <input type="email" class="form-input" placeholder="E-Posta">
+                                    <input type="email" class="form-input" data-i18n-placeholder="company_email" placeholder="E-Posta">
                                 </div>
                             </div>
 
                             <!-- Yetkili Telefonu -->
                             <div class="form-group">
-                                <label class="input-label">Yetkili Telefonu</label>
+                                <label class="input-label" data-i18n="authorized_phone">Yetkili Telefonu</label>
                                 <div class="phone-input-group">
                                     <select class="phone-country-select">
                                         <option value="TR">TR ∨</option>
@@ -230,19 +230,19 @@
 
                             <!-- Vergi Dairesi -->
                             <div class="form-group">
-                                <label class="input-label">Vergi Dairesi</label>
-                                <input type="text" class="form-input" placeholder="Vergi Dairesi">
+                                <label class="input-label" data-i18n="tax_office">Vergi Dairesi</label>
+                                <input type="text" class="form-input" data-i18n-placeholder="tax_office" placeholder="Vergi Dairesi">
                             </div>
 
                             <!-- Vergi Numarası -->
                             <div class="form-group">
-                                <label class="input-label">Vergi Numarası</label>
+                                <label class="input-label" data-i18n="tax_number">Vergi Numarası</label>
                                 <input type="text" class="form-input" placeholder="00">
                             </div>
 
                             <!-- Çözüm Paketleri -->
                             <div class="form-group">
-                                <label class="input-label">Çözüm Paketleri</label>
+                                <label class="input-label" data-i18n="solution_packages">Çözüm Paketleri</label>
                                 <input type="text" class="form-input" placeholder="upu.machine, upu.product, upu.person">
                             </div>
                         </div>
@@ -251,44 +251,44 @@
                         <div class="form-column">
                             <!-- Ülke -->
                             <div class="form-group">
-                                <label class="input-label">Ülke</label>
+                                <label class="input-label" data-i18n="country">Ülke</label>
                                 <select class="form-select">
-                                    <option value="">Firma Adresi</option>
+                                    <option value="" data-i18n="company_address">Firma Adresi</option>
                                 </select>
                             </div>
 
                             <!-- Zaman Dilimi -->
                             <div class="form-group">
-                                <label class="input-label">Zaman Dilimi</label>
+                                <label class="input-label" data-i18n="timezone">Zaman Dilimi</label>
                                 <select class="form-select">
-                                    <option value="">Firma Adresi</option>
+                                    <option value="" data-i18n="company_address">Firma Adresi</option>
                                 </select>
                             </div>
 
                             <!-- Ekipman Kredisi & Personel Kredisi -->
                             <div class="form-row-two">
                                 <div class="form-group">
-                                    <label class="input-label">Ekipman Kredisi</label>
+                                    <label class="input-label" data-i18n="equipment_credit">Ekipman Kredisi</label>
                                     <input type="text" class="form-input" value="42">
                                 </div>
                                 <div class="form-group">
-                                    <label class="input-label">Personel Kredisi</label>
+                                    <label class="input-label" data-i18n="personnel_credit">Personel Kredisi</label>
                                     <input type="text" class="form-input" value="124">
                                 </div>
                             </div>
 
                             <!-- Gün Başlangıç Saati -->
                             <div class="form-group">
-                                <label class="input-label">Gün Başlangıç Saati</label>
+                                <label class="input-label" data-i18n="day_start_hour">Gün Başlangıç Saati</label>
                                 <select class="form-select">
-                                    <option value="">Firma Adresi</option>
+                                    <option value="" data-i18n="company_address">Firma Adresi</option>
                                 </select>
                             </div>
 
                             <!-- T1 Standart & T1 -->
                             <div class="form-row-two">
                                 <div class="form-group">
-                                    <label class="input-label">T1 Standart</label>
+                                    <label class="input-label" data-i18n="t1_standard">T1 Standart</label>
                                     <input type="text" class="form-input" placeholder="+(90)">
                                 </div>
                                 <div class="form-group">
@@ -314,8 +314,8 @@
 
                     <!-- Alt Aksiyon Butonları (Önceki & Sonraki) -->
                     <div class="form-action-buttons">
-                        <button type="button" class="btn-step-prev btn-prev">Önceki</button>
-                        <button type="button" class="btn-step-next btn-next">Sonraki</button>
+                        <button type="button" class="btn-step-prev btn-prev" data-i18n="btn_prev">Önceki</button>
+                        <button type="button" class="btn-step-next btn-next" data-i18n="btn_next">Sonraki</button>
                     </div>
 
                 </form>
@@ -324,37 +324,81 @@
 
             <!-- STEP 3: DEPARTMAN EKLE (DEPARTMENTS) -->
             <div class="step-view" id="step-3">
-                <div class="welcome-header department-header">
-                    <h1 class="step-title">Departman Ekle</h1>
-                    <p class="welcome-subtitle">
-                        Firmanızda çalışan personelleri eklemeden önce; muhasebe, insan kaynakları, üretim gibi departmanları oluşturarak yönetim kolaylığı sağlayabilirsiniz.
-                    </p>
+                
+                <!-- EMPTY STATE VIEW (Hiç departman yokken) -->
+                <div class="dept-empty-view" id="deptEmptyView">
+                    <div class="welcome-header department-header">
+                        <h1 class="step-title" data-i18n="step3_title">Departman Ekle</h1>
+                        <p class="welcome-subtitle" data-i18n="step3_sub">
+                            Firmanızda çalışan personelleri eklemeden önce; muhasebe, insan kaynakları, üretim gibi departmanları oluşturarak yönetim kolaylığı sağlayabilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Ortadaki Geniş + Ekle Butonu -->
+                    <div class="add-department-wrapper">
+                        <button type="button" class="btn-add-item" id="btnAddDepartment">
+                            <span class="plus-sign">+</span>
+                            <span data-i18n="btn_add">Ekle</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Ortadaki Geniş + Ekle Butonu -->
-                <div class="add-department-wrapper">
-                    <button type="button" class="btn-add-item" id="btnAddDepartment">
-                        <span class="plus-sign">+</span>
-                        <span>Ekle</span>
-                    </button>
+                <!-- LIST STATE VIEW (Departmanlar eklendiğinde görünen liste) -->
+                <div class="dept-list-view" id="deptListView" style="display: none;">
+                    <div class="dept-card-container">
+                        
+                        <!-- Header -->
+                        <div class="dept-card-header">
+                            <h2 class="dept-card-title">Departmanlar</h2>
+                            <span class="dept-count-badge" id="deptCountBadge">0/10 Departman</span>
+                        </div>
+
+                        <!-- Arama Kutusu -->
+                        <div class="dept-search-wrapper">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="deptSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- Dinamik Liste -->
+                        <div class="dept-items-list" id="deptItemsList">
+                            <!-- JS ile üretilen Departman Kartları -->
+                        </div>
+
+                        <!-- Yeni Departman Ekle Butonu -->
+                        <button type="button" class="btn-add-new-dept" id="btnAddNewDept">
+                            <span class="plus-sign">+</span>
+                            <span>Yeni Departman Ekle</span>
+                        </button>
+
+                    </div>
+
+                    <!-- Alt Önceki & Sonraki Butonları -->
+                    <div class="form-action-buttons" style="margin-top: 20px;">
+                        <button type="button" class="btn-step-prev btn-prev" data-i18n="btn_prev">Önceki</button>
+                        <button type="button" class="btn-step-next btn-next" data-i18n="btn_next">Sonraki</button>
+                    </div>
                 </div>
 
-                <!-- Alt Önceki & Sonraki Butonları -->
-                <div class="form-action-buttons" style="margin-top: 48px;">
-                    <button type="button" class="btn-step-prev btn-prev">Önceki</button>
-                    <button type="button" class="btn-step-next btn-next">Sonraki</button>
-                </div>
             </div>
 
-            <!-- STEP 4 TEMPLATE -->
+            <!-- STEP 4: PERSONEL EKLE (PERSONNELS) -->
             <div class="step-view" id="step-4">
-                <div class="welcome-header">
-                    <h2>Step 4: Personnels</h2>
-                    <p class="welcome-subtitle">Personel ve kullanıcı rol tanımlamaları.</p>
-                </div>
-                <div class="action-button-wrapper flex-buttons">
-                    <button type="button" class="btn-secondary btn-prev">Geri</button>
-                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+                <!-- EMPTY STATE VIEW (Hiç personel yokken) -->
+                <div class="personnel-empty-view" id="personnelEmptyView">
+                    <div class="welcome-header personnel-header">
+                        <h1 class="step-title" data-i18n="step4_title">Personel Ekle</h1>
+                        <p class="welcome-subtitle" data-i18n="step4_sub">
+                            Firmanızda çalışan personellerinizi ekleyebilir, oluşturduğunuz departmanlara atayabilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Ortadaki Geniş + Ekle Butonu -->
+                    <div class="add-personnel-wrapper">
+                        <button type="button" class="btn-add-item" id="btnAddPersonnel">
+                            <span class="plus-sign">+</span>
+                            <span data-i18n="btn_add">Ekle</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -433,12 +477,51 @@
             <button type="button" class="floating-btn logout-btn" id="logoutBtn" title="Çıkış Yap" onclick="location.href='index.html';">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
             </button>
-        </div>
+        <!-- DEPARTMAN EKLEME MODAL (Web Modal Base) -->
+        <div class="modal-overlay" id="departmentModal">
+            <div class="modal-card">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title" data-i18n="modal_dept_title">Yeni Departman Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeDeptModalBtn">&times;</button>
+                </div>
 
-        <!-- Sağ Alt Yüzen Firma Logosu Rozeti -->
-        <div class="floating-company-badge" id="floatingCompanyBadge" style="display: none;">
-            <div class="badge-logo-box">
-                <img src="images/persontwin.png" alt="Company Logo" id="badgeLogoImg">
+                <!-- Body -->
+                <div class="modal-body">
+                    <!-- Departman Adı -->
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="input-label" data-i18n="modal_dept_name">Departman Adı</label>
+                        <input type="text" class="form-input" id="modalDeptNameInput" placeholder="Departman">
+                    </div>
+
+                    <!-- Etiket -->
+                    <div class="form-group">
+                        <label class="input-label" data-i18n="modal_tag_label">Etiket</label>
+                        <div class="tag-input-row">
+                            <div class="tag-input-wrapper">
+                                <input type="text" class="form-input" id="modalTagInput" placeholder="Etiket Adı ve Rengi">
+                                <input type="color" id="modalTagColorPicker" value="#7C5CFC" style="display: none;">
+                                <div class="color-wheel-icon" id="colorWheelBtn" title="Renk Seç">
+                                    <img src="/images/chromatic 1.png" alt="Color Wheel" style="width: 24px; height: 24px; display: block; object-fit: contain;">
+                                </div>
+                            </div>
+                            <button type="button" class="tag-add-btn" id="addTagBtn">+</button>
+                        </div>
+
+                        <!-- Etiket Pill'leri -->
+                        <div class="tags-container" id="modalTagsContainer">
+                            <span class="tag-pill" style="background-color: #7C5CFC;">Label <button type="button" class="tag-remove">&times;</button></span>
+                            <span class="tag-pill" style="background-color: #D9381E;">Label <button type="button" class="tag-remove">&times;</button></span>
+                            <span class="tag-pill" style="background-color: #389E8D;">Label <button type="button" class="tag-remove">&times;</button></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-cancel" id="cancelDeptModalBtn" data-i18n="btn_cancel">Vazgeç</button>
+                    <button type="button" class="btn-modal-submit" id="saveDeptModalBtn" data-i18n="btn_save">Kaydet</button>
+                </div>
             </div>
         </div>
 
