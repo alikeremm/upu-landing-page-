@@ -203,10 +203,19 @@ body {
     font-weight: 800;
 }
 
-.welcome-text {
+.welcome-text, .welcome-suffix {
     color: #111827;
-    margin-left: 6px;
+    margin-left: 4px;
     font-weight: 700;
+}
+
+.welcome-prefix {
+    color: #111827;
+    font-weight: 700;
+}
+
+.welcome-prefix:not(:empty) {
+    margin-right: 10px;
 }
 
 .welcome-subtitle {
@@ -836,20 +845,33 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   12. TÜM ADIMLAR İÇİN BAĞIMSIZ SAYFA VE METİN STİLLERİ (Per-Step Independent CSS)
+   12. TÜM ADIMLAR İÇİN ORTAK VE DÜZENLİ DİKEY BOŞLUK (Standardized Centered Spacing)
    -------------------------------------------------------------------------- */
 
+.step-view.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    transition: margin-top 0.2s ease;
+}
+
 /* STEP 1: LANGUAGE (DİL SEÇİMİ) */
+#step-1.step-view.active {
+    margin-top: 100px;
+}
 #step-1 .brand-welcome { font-size: 44px; font-weight: 500; }
 #step-1 .welcome-subtitle { font-size: 18px; max-width: 620px; color: #667085; }
 
 /* STEP 2: COMPANY (FİRMA OLUŞTUR) */
+#step-2.step-view.active {
+    margin-top: 80px;
+}
 #step-2 .step-title { font-size: 28px; font-weight: 700; color: #101828; }
 
 /* STEP 3: DEPARTMENTS (DEPARTMAN EKLE) */
 #step-3.step-view.active {
-    margin: auto 0;
-    justify-content: center;
     margin-top: 100px;
 }
 #step-3 .step-title { font-size: 30px; font-weight: 600; color: #101828; }
@@ -857,8 +879,6 @@ body {
 
 /* STEP 4: PERSONNELS (PERSONEL EKLE) */
 #step-4.step-view.active {
-    margin: auto 0;
-    justify-content: center;
     margin-top: 100px;
 }
 #step-4 .step-title { font-size: 30px; font-weight: 600; color: #101828; }
@@ -875,8 +895,28 @@ body {
 }
 
 /* STEP 5: INTERNAL OP. (İÇ OPERASYONLAR) */
-#step-5 .step-title { font-size: 28px; font-weight: 700; color: #101828; }
-#step-5 .welcome-subtitle { font-size: 18px; max-width: 620px; color: #667085; }
+#step-5.step-view.active {
+    margin-top: 100px;
+}
+#step-5 .step-title { font-size: 30px; font-weight: 600; color: #101828; }
+#step-5 .welcome-subtitle { font-size: 18px; font-weight: 400; max-width: 620px; color: #667085; }
+
+/* STEP 6: EXTERNAL OP. (DIŞ OPERASYONLAR) */
+#step-6.step-view.active {
+    margin-top: 100px;
+}
+#step-6 .step-title { font-size: 30px; font-weight: 600; color: #101828; }
+#step-6 .welcome-subtitle { font-size: 18px; font-weight: 400; max-width: 620px; color: #667085; }
+
+.internal-op-header {
+    margin-bottom: 40px;
+}
+
+.add-internal-op-wrapper {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+}
 
 /* STEP 6: EXTERNAL OP. (DIŞ OPERASYONLAR) */
 #step-6 .step-title { font-size: 28px; font-weight: 700; color: #101828; }
@@ -1042,10 +1082,11 @@ body {
 }
 
 .modal-footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 8px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 24px !important;
 }
 
 .btn-modal-cancel {
@@ -1067,18 +1108,18 @@ body {
 .btn-modal-submit {
     height: 44px;
     border: none;
-    background-color: #7C5CFC;
+    background-color: #7F56D9;
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(124, 92, 252, 0.3);
+    box-shadow: 0 4px 12px rgba(127, 86, 217, 0.25);
     transition: background-color 0.2s;
 }
 
 .btn-modal-submit:hover {
-    background-color: #6846F9;
+    background-color: #6941C6;
 }
 
 @keyframes fadeInModal {
@@ -1089,7 +1130,7 @@ body {
 /* --------------------------------------------------------------------------
    14. DEPARTMAN LİSTE GÖRÜNÜMÜ STİLLERİ (Figma Pixel-Perfect List View)
    -------------------------------------------------------------------------- */
-.dept-empty-view, .dept-list-view {
+.dept-empty-view, .dept-list-view, .personnel-empty-view, .personnel-list-view, .internal-op-empty-view, .internal-op-list-view {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -1279,4 +1320,495 @@ body {
 .btn-buy-dept-credit:hover {
     background-color: #FEF3F2;
     border-color: #D9381E;
+}
+
+/* --------------------------------------------------------------------------
+   15. YENİ PERSONEL EKLE MODAL STİLLERİ (Figma Pixel-Perfect Tabbed Modal)
+   -------------------------------------------------------------------------- */
+.modal-card-wide {
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-tabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid #EAECF0;
+    margin-bottom: 16px;
+}
+
+.modal-tab-btn {
+    background: none;
+    border: none;
+    padding: 8px 4px 12px 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #667085;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.modal-tab-btn:hover {
+    color: #344054;
+}
+
+.modal-tab-btn.active {
+    color: #7C5CFC;
+}
+
+.modal-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2.5px;
+    background-color: #7C5CFC;
+    border-radius: 2px;
+}
+
+.modal-tab-content {
+    display: none;
+}
+
+.modal-tab-content.active {
+    display: block;
+}
+
+.modal-two-column-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+    text-align: left;
+}
+
+.modal-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #7C5CFC;
+    cursor: pointer;
+}
+
+.checkbox-label-text {
+    font-size: 13px;
+    color: #344054;
+    font-weight: 500;
+}
+
+.modal-info-footnote {
+    font-size: 12px;
+    color: #667085;
+    margin-top: 16px;
+    text-align: left;
+}
+
+/* --------------------------------------------------------------------------
+   16. YETENEK VE OPERASYON SEKMESİ STİLLERİ (Figma Pixel-Perfect Skills List)
+   -------------------------------------------------------------------------- */
+.skills-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-top: 8px;
+}
+
+.skills-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skills-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #101828;
+}
+
+.skills-count-badge {
+    background-color: #F4F3FF;
+    color: #7C5CFC;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.btn-add-skill-trigger {
+    background: none;
+    border: none;
+    color: #7C5CFC;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.2s;
+}
+
+.btn-add-skill-trigger:hover {
+    opacity: 0.85;
+}
+
+.skills-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 280px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.skill-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #F2F4F7;
+}
+
+.skill-item-row:last-child {
+    border-bottom: none;
+}
+
+.skill-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #101828;
+    margin-bottom: 2px;
+}
+
+.skill-score {
+    font-size: 13px;
+    font-weight: 500;
+    color: #667085;
+}
+
+/* --------------------------------------------------------------------------
+   17. PERSONEL LİSTE GÖRÜNÜMÜ STİLLERİ (Figma Pixel-Perfect Personnel List)
+   -------------------------------------------------------------------------- */
+.personnel-empty-view, .personnel-list-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.person-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+    padding: 10px 16px 10px 20px;
+    border-top: 1px solid #D0D5DD;
+    border-right: 1px solid #D0D5DD;
+    border-bottom: 1px solid #D0D5DD;
+    border-left: 8px solid #D0D5DD;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.person-item-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(127, 86, 217, 0.12);
+}
+
+.person-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.person-avatar-wrapper {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(135deg, #256046, #A2D0C4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.person-avatar-wrapper img, .person-avatar-img {
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+.person-avatar-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #EAECF0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #344054;
+    font-size: 14px;
+}
+
+.person-info-col {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.person-full-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #101828;
+    line-height: 1.3;
+}
+
+.person-sub-title {
+    font-size: 13px;
+    color: #667085;
+    font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   18. YENİ İÇ OPERASYON MODAL STİLLERİ (KPI Inputs, Managers Grid & Icons)
+   -------------------------------------------------------------------------- */
+.kpi-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #D0D5DD;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    height: 42px;
+}
+
+.kpi-badge {
+    background-color: #F9FAFB;
+    border-right: 1px solid #D0D5DD;
+    color: #667085;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 14px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.kpi-input-group .form-input {
+    border: none;
+    border-radius: 0;
+    height: 100%;
+}
+
+.input-footnote {
+    font-size: 12px;
+    color: #667085;
+    margin-top: 4px;
+    display: block;
+    text-align: left;
+}
+
+.op-managers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.op-manager-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #EAECF0;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+    user-select: none;
+}
+
+.op-manager-card:hover {
+    border-color: #D0D5DD;
+    background-color: #F9FAFB;
+}
+
+.icon-selector-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.icon-select-btn {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid #D0D5DD;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.icon-select-btn.active, .icon-select-btn:hover {
+    border-color: #7F56D9;
+    background-color: #F4F3FF;
+}
+
+/* 11 Kolonlu SVG İkon Seçim Grid'i (Figma Photo 1 Pixel-Perfect) */
+.op-icon-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 12px 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 12px 4px 16px 4px;
+    justify-items: center;
+    align-items: center;
+}
+
+.icon-picker-item {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition: background-color 0.15s ease;
+    color: #344054;
+    overflow: visible !important;
+}
+
+.icon-picker-item svg {
+    display: block;
+    overflow: visible !important;
+}
+
+.icon-picker-item:hover {
+    background-color: #F2F4F7;
+}
+
+.icon-picker-item.active {
+    background-color: #EAECF0 !important;
+    color: #101828;
+}
+
+/* --------------------------------------------------------------------------
+   16. YENİ DIŞ OPERASYON VE TEDARİKÇİ LİSTE MODAL STİLLERİ (Figma Spec)
+   -------------------------------------------------------------------------- */
+.suppliers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.supplier-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    border: 1px solid transparent;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.supplier-item-row:hover {
+    background-color: #F9FAFB;
+    border-color: #EAECF0;
+}
+
+.supplier-item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #101828;
+}
+
+.supplier-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #7F56D9;
+    cursor: pointer;
+}
+
+.supplier-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.supplier-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: #667085;
+    transition: color 0.15s;
+}
+
+.supplier-action-btn.edit-btn:hover { color: #344054; }
+.supplier-action-btn.delete-btn { color: #D9381E; }
+.supplier-action-btn.delete-btn:hover { color: #B42318; }
+
+.op-managers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.op-manager-item:hover {
+    background-color: #F9FAFB;
 }

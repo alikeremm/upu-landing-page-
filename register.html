@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>upu.io - onboarding / kayıt ol</title>
+    <title>upu.io</title>
     
     <!-- Google Fonts (Inter / Outfit) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,7 +74,7 @@
                 <!-- Hoşgeldiniz Başlığı -->
                 <div class="welcome-header">
                     <h1 class="brand-welcome">
-                        <a href="index.html" style="text-decoration:none; color:inherit;"><span class="brand-upu">upu.</span><span class="brand-io">io</span></a><span class="welcome-text" data-i18n="welcome_text">'ya hoşgeldiniz.</span>
+                        <span class="welcome-prefix" id="welcomePrefix"></span><a href="index.html" style="text-decoration:none; color:inherit;"><span class="brand-upu">upu.</span><span class="brand-io">io</span></a><span class="welcome-suffix" id="welcomeSuffix">'ya hoşgeldiniz.</span>
                     </h1>
                     <p class="welcome-subtitle" data-i18n="welcome_sub">
                         Kaydınızı oluşturmanız ve upu.io'yu kullanabilmeniz için gerekli adımları tamamlamanız gerekmektedir. Adımları tamamlamak için uygun dili seçin ve "Başla" butonuna tıklayın.
@@ -400,53 +400,288 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- LIST VIEW (Personel eklendiğinde görünen liste) -->
+                <div class="personnel-list-view" id="personnelListView" style="display: none;">
+                    <div class="dept-card-container">
+                        
+                        <!-- Header -->
+                        <div class="dept-card-header">
+                            <h2 class="dept-card-title">Personeller</h2>
+                            <span class="dept-count-badge" id="personnelCountBadge">0/56 Personel Kredisi</span>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="dept-search-wrapper">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="personSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- Personnel List Container -->
+                        <div class="dept-items-list" id="personItemsList">
+                            <!-- JS ile render edilen personel kartları -->
+                        </div>
+
+                        <!-- Yeni Personel Ekle Butonu -->
+                        <button type="button" class="btn-add-new-dept" id="btnAddNewPerson">
+                            <span class="plus-sign">+</span>
+                            <span>Yeni Personel Ekle</span>
+                        </button>
+
+                    </div>
+
+                    <!-- Alt Önceki & Sonraki Butonları -->
+                    <div class="form-action-buttons" style="margin-top: 20px;">
+                        <button type="button" class="btn-step-prev btn-prev" data-i18n="btn_prev">Önceki</button>
+                        <button type="button" class="btn-step-next btn-next" data-i18n="btn_next">Sonraki</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- STEP 5 TEMPLATE -->
+            <!-- STEP 5: İÇ OPERASYON EKLE (INTERNAL OP.) -->
             <div class="step-view" id="step-5">
-                <div class="welcome-header">
-                    <h2>Step 5: Internal Op.</h2>
-                    <p class="welcome-subtitle">İç operasyonlar ve süreç akışları.</p>
+                <!-- EMPTY STATE VIEW (Hiç iç operasyon yokken) -->
+                <div class="internal-op-empty-view" id="internalOpEmptyView">
+                    <div class="welcome-header internal-op-header">
+                        <h1 class="step-title" data-i18n="step5_title">İç Operasyon Ekle</h1>
+                        <p class="welcome-subtitle" data-i18n="step5_sub">
+                            Frezeleme, tornalama, kesme gibi firma içi operasyonlarınızı ekleyebilir ve eklemiş olduğunuz operasyonları ekipmanlarınıza göre kategorize edebilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Ortadaki Geniş + Ekle Butonu -->
+                    <div class="add-internal-op-wrapper">
+                        <button type="button" class="btn-add-item" id="btnAddInternalOp" onclick="if(window.openInternalOpModal) window.openInternalOpModal();">
+                            <span class="plus-sign">+</span>
+                            <span data-i18n="btn_add">Ekle</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="action-button-wrapper flex-buttons">
-                    <button type="button" class="btn-secondary btn-prev">Geri</button>
-                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+
+                <!-- LIST VIEW (Operasyon eklendiğinde görünen liste) -->
+                <div class="internal-op-list-view" id="internalOpListView" style="display: none;">
+                    <div class="dept-card-container">
+                        
+                        <!-- Header -->
+                        <div class="dept-card-header">
+                            <h2 class="dept-card-title">İç Operasyonlar</h2>
+                            <span class="dept-count-badge" id="internalOpCountBadge">0 Operasyon</span>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="dept-search-wrapper">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="internalOpSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- List Container -->
+                        <div class="dept-items-list" id="internalOpItemsList">
+                            <!-- JS ile render edilen operasyon kartları -->
+                        </div>
+
+                        <!-- Yeni İç Operasyon Ekle Butonu -->
+                        <button type="button" class="btn-add-new-dept" id="btnAddNewInternalOp" onclick="if(window.openInternalOpModal) window.openInternalOpModal();">
+                            <span class="plus-sign">+</span>
+                            <span>Yeni İç Operasyon Ekle</span>
+                        </button>
+
+                    </div>
                 </div>
             </div>
 
-            <!-- STEP 6 TEMPLATE -->
+            <!-- STEP 6: DIŞ OPERASYON EKLE (EXTERNAL OP.) -->
             <div class="step-view" id="step-6">
-                <div class="welcome-header">
-                    <h2>Step 6: External Op.</h2>
-                    <p class="welcome-subtitle">Dış operasyonlar ve fason süreçler.</p>
+                <!-- EMPTY STATE VIEW (Hiç dış operasyon yokken - Figma Spec) -->
+                <div class="internal-op-empty-view" id="externalOpEmptyView">
+                    <div class="welcome-header internal-op-header">
+                        <h1 class="step-title" data-i18n="step6_title">Dış Operasyon Ekle</h1>
+                        <p class="welcome-subtitle" data-i18n="step6_sub">
+                            Firmanızın dış operasyonlarını ekleyebilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Ortadaki Geniş + Ekle Butonu -->
+                    <div class="add-internal-op-wrapper">
+                        <button type="button" class="btn-add-item" id="btnAddExternalOp" onclick="if(window.openExternalOpModal) window.openExternalOpModal();">
+                            <span class="plus-sign">+</span>
+                            <span data-i18n="btn_add">Ekle</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="action-button-wrapper flex-buttons">
-                    <button type="button" class="btn-secondary btn-prev">Geri</button>
-                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+
+                <!-- LIST VIEW (Dış Operasyon eklendiğinde görünen liste) -->
+                <div class="internal-op-list-view" id="externalOpListView" style="display: none;">
+                    <div class="dept-card-container">
+                        
+                        <!-- Header -->
+                        <div class="dept-card-header">
+                            <h2 class="dept-card-title">Dış Operasyonlar</h2>
+                            <span class="dept-count-badge" id="externalOpCountBadge">0 Operasyon</span>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="dept-search-wrapper">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="externalOpSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- List Container -->
+                        <div class="dept-items-list" id="externalOpItemsList">
+                            <!-- JS ile render edilen dış operasyon kartları -->
+                        </div>
+
+                        <!-- Yeni Dış Operasyon Ekle Butonu -->
+                        <button type="button" class="btn-add-new-dept" id="btnAddNewExternalOp" onclick="if(window.openExternalOpModal) window.openExternalOpModal();">
+                            <span class="plus-sign">+</span>
+                            <span>Yeni Dış Operasyon Ekle</span>
+                        </button>
+
+                    </div>
                 </div>
             </div>
 
-            <!-- STEP 7 TEMPLATE -->
+            <!-- STEP 7: EKİPMAN EKLE (EQUIPMENTS) -->
             <div class="step-view" id="step-7">
-                <div class="welcome-header">
-                    <h2>Step 7: Equipments</h2>
-                    <p class="welcome-subtitle">Ekipman, etiket ve donanım tanımlamaları.</p>
+                <!-- EMPTY STATE VIEW (Hiç ekipman yokken - Figma Spec) -->
+                <div class="internal-op-empty-view" id="equipmentsEmptyView">
+                    <div class="welcome-header internal-op-header">
+                        <h1 class="step-title" data-i18n="step7_title">Ekipman Ekle</h1>
+                        <p class="welcome-subtitle" data-i18n="step7_sub">
+                            Firmanızda bulunan ekipmanları ekleyebilir, önceden oluşturduğunuz operasyonlara ekipmanlarınızı dahil edebilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Ortadaki Geniş + Ekle Butonu -->
+                    <div class="add-internal-op-wrapper">
+                        <button type="button" class="btn-add-item" id="btnAddEquipment" onclick="if(window.openEquipmentModal) window.openEquipmentModal();">
+                            <span class="plus-sign">+</span>
+                            <span data-i18n="btn_add">Ekle</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="action-button-wrapper flex-buttons">
-                    <button type="button" class="btn-secondary btn-prev">Geri</button>
-                    <button type="button" class="btn-primary btn-next">Devam Et →</button>
+
+                <!-- LIST VIEW (Ekipman eklendiğinde görünen liste - Figma Spec) -->
+                <div class="internal-op-list-view" id="equipmentsListView" style="display: none;">
+                    <div class="dept-card-container" style="max-width: 720px;">
+                        
+                        <!-- Header -->
+                        <div class="dept-card-header" style="margin-bottom: 16px;">
+                            <h2 class="dept-card-title">Ekipmanlar</h2>
+                            <span class="dept-count-badge" id="equipmentCreditBadge" style="background-color: #F4F3FF; color: #7F56D9; font-weight: 600; padding: 4px 12px; border-radius: 12px; font-size: 13px;">6 / 42 Ekipman Kredisi</span>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="dept-search-wrapper" style="margin-bottom: 16px;">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="equipmentSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- Tabs Row: Tanımsız Ekipmanlar (36) & Tanımlı Ekipmanlar (6) -->
+                        <div class="equipment-list-tabs" style="display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #EAECF0; padding-bottom: 12px; margin-bottom: 16px;">
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #344054;">
+                                <span>Tanımsız Ekipmanlar</span>
+                                <span id="undefinedBadgeCount" style="background-color: #EFF8FF; color: #175CD3; font-size: 12px; padding: 2px 8px; border-radius: 12px; font-weight: 600;">36</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #344054;">
+                                <span>Tanımlı Ekipmanlar</span>
+                                <span id="definedBadgeCount" style="background-color: #ECFDF3; color: #027A48; font-size: 12px; padding: 2px 8px; border-radius: 12px; font-weight: 600;">6</span>
+                            </div>
+                        </div>
+
+                        <!-- 2-Column Equipment Container -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;">
+                            
+                            <!-- Left Column: Tanımsız Ekipmanlar -->
+                            <div id="undefinedEquipmentsList" style="display: flex; flex-direction: column; gap: 10px;">
+                                <!-- JS ile render edilir -->
+                            </div>
+
+                            <!-- Right Column: Tanımlı Ekipmanlar -->
+                            <div id="definedEquipmentsList" style="display: flex; flex-direction: column; gap: 10px;">
+                                <!-- JS ile render edilir -->
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Alt Önceki & Sonraki Butonları (List View Altı - Figma Spec) -->
+                    <div class="form-action-buttons" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 720px; margin-left: auto; margin-right: auto;">
+                        <button type="button" class="btn-step-prev btn-prev" data-i18n="btn_prev">Önceki</button>
+                        <button type="button" class="btn-step-next btn-next" data-i18n="btn_next">Sonraki</button>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- STEP 8 TEMPLATE -->
+            <!-- STEP 8: VARDİYA EKLE (SHIFTS - Figma Spec) -->
             <div class="step-view" id="step-8">
-                <div class="welcome-header">
-                    <h2>Step 8: Shifts</h2>
-                    <p class="welcome-subtitle">Vardiya planları ve çalışma saatleri düzeni.</p>
+                <!-- EMPTY STATE VIEW (Hiç vardiya yokken - Figma Spec) -->
+                <div class="internal-op-empty-view" id="shiftsEmptyView">
+                    <div class="welcome-header internal-op-header">
+                        <h1 class="step-title" data-i18n="step8_title">Vardiya Ekle</h1>
+                        <p class="welcome-subtitle" data-i18n="step8_sub">
+                            Firmanızın çalışma saatlerini, molaları ve tatilleri sisteme ekleyerek, takvimden takip edebilir, personellerinizi de haberdar edebilirsiniz.
+                        </p>
+                    </div>
+
+                    <!-- Ortadaki Geniş + Ekle Butonu -->
+                    <div class="add-internal-op-wrapper">
+                        <button type="button" class="btn-add-item" id="btnAddShift" onclick="window.openShiftModal()" style="cursor: pointer;">
+                            <span class="plus-sign" style="pointer-events: none;">+</span>
+                            <span data-i18n="btn_add" style="pointer-events: none;">Ekle</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="action-button-wrapper flex-buttons">
-                    <button type="button" class="btn-secondary btn-prev">Geri</button>
-                    <button type="button" class="btn-primary" onclick="alert('Onboarding başarıyla tamamlandı!');">Tamamla ✨</button>
+
+                <!-- LIST VIEW (Vardiyalar Listesi - Figma Spec) -->
+                <div class="internal-op-list-view" id="shiftsListView" style="display: none; width: 100%;">
+                    <div style="max-width: 620px; margin: 0 auto; background: #FFFFFF; border: 1px solid #EAECF0; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(16,24,40,0.05);">
+                        
+                        <!-- Header Bar -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                            <h2 style="font-size: 18px; font-weight: 700; color: #101828; margin: 0;">Vardiyalar</h2>
+                            <span id="shiftListBadgeCount" style="padding: 4px 12px; border-radius: 16px; background: #F4F3FF; color: #7F56D9; font-size: 13px; font-weight: 600;">4 Vardiya</span>
+                        </div>
+
+                        <!-- Shifts Cards Container -->
+                        <div id="definedShiftsList" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+                            <!-- JS ile render edilir -->
+                        </div>
+
+                        <!-- + Yeni Vardiya Ekle Bottom Button -->
+                        <button type="button" id="btnAddNewShiftFromList" onclick="window.openShiftModal()" style="width: 100%; padding: 10px; border: 1px solid #D0D5DD; border-radius: 8px; background: #FFFFFF; font-size: 14px; font-weight: 600; color: #344054; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 1px 2px rgba(16,24,40,0.05); transition: all 0.15s;">
+                            <span style="font-size: 16px; pointer-events: none;">+</span>
+                            <span style="pointer-events: none;">Yeni Vardiya Ekle</span>
+                        </button>
+
+                        <!-- 24 Saat / 3 Vardiya Sınırı Uyarı Satırı (Figma Spec) -->
+                        <div id="shiftLimitWarningRow" style="display: none; align-items: center; gap: 6px; margin-top: 12px; font-size: 13px; color: #475467;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <span>24 saat içerisinde <strong>en fazla 3 vardiya</strong> ekleyebilirsiniz.</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Alt Önceki & Sonraki Butonları (Figma Spec) -->
+                    <div class="form-action-buttons" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 620px; margin-left: auto; margin-right: auto;">
+                        <button type="button" class="btn-step-prev btn-prev" data-i18n="btn_prev">Önceki</button>
+                        <button type="button" class="btn-step-next btn-next" onclick="window.goToStep(9)" style="background: #7F56D9; color: #FFFFFF;">Sonraki</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 9: KAPANIŞ SAYFASI (Firmanızın Kurulumu Tamamlandı - Figma Spec) -->
+            <div class="step-view" id="step-9" style="margin-top: 100px;">
+                <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <h1 style="font-size: 28px; font-weight: 700; color: #101828; margin-bottom: 12px;">Firmanızın Kurulumu Tamamlandı !</h1>
+                    <p style="font-size: 15px; color: #667085; line-height: 1.6; max-width: 520px; margin: 0 auto 32px auto;">
+                        upu.io'ya firmanızı tanımladınız. Başla butonuna basarak firmanızın dijital ikizini oluşturabilirsiniz.
+                    </p>
+                    <button type="button" id="btnFinishStart" onclick="window.location.href='index.html';" style="padding: 12px 36px; background: #7F56D9; color: #FFFFFF; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 1px 3px rgba(16,24,40,0.1); transition: background 0.15s;">
+                        <span>Başla</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
                 </div>
             </div>
 
@@ -477,6 +712,14 @@
             <button type="button" class="floating-btn logout-btn" id="logoutBtn" title="Çıkış Yap" onclick="location.href='index.html';">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
             </button>
+        </div>
+
+        <!-- Sağ Alt Yüzen Firma Logosu Rozeti (Figma Spec: 120px x 90px) -->
+        <div class="floating-company-badge" id="floatingCompanyBadge" style="display: none;">
+            <div class="badge-logo-box">
+                <img src="" alt="Firma Logosu" id="badgeLogoImg" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+        </div>
         <!-- DEPARTMAN EKLEME MODAL (Web Modal Base) -->
         <div class="modal-overlay" id="departmentModal">
             <div class="modal-card">
@@ -525,9 +768,997 @@
             </div>
         </div>
 
+        <!-- PERSONEL EKLEME MODAL (Web Modal Base - Tabbed 2-Column Form) -->
+        <div class="modal-overlay" id="personnelModal">
+            <div class="modal-card modal-card-wide">
+                
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title" data-i18n="modal_personnel_title">Yeni Personel Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closePersonModalBtn">&times;</button>
+                </div>
+
+                <!-- Tab Navigasyonu -->
+                <div class="modal-tabs">
+                    <button type="button" class="modal-tab-btn active" data-tab="tab-genel">Genel</button>
+                    <button type="button" class="modal-tab-btn" data-tab="tab-yetenek">Yetenek ve Operasyon</button>
+                    <button type="button" class="modal-tab-btn" data-tab="tab-basari">Kazanılmış Başarı</button>
+                </div>
+
+                <!-- Body Tabs Container -->
+                <div class="modal-body">
+                    
+                    <!-- TAB 1: GENEL -->
+                    <div class="modal-tab-content active" id="tab-genel">
+                        <div class="modal-two-column-grid">
+                            
+                            <!-- SOL KOLON -->
+                            <div class="modal-col">
+                                <!-- Personel Fotoğrafı -->
+                                <div class="form-group logo-upload-group">
+                                    <div class="logo-upload-box" id="personPhotoUploadBox">
+                                        <input type="file" id="personPhotoInput" accept="image/*" style="display: none;">
+                                        <div class="logo-plus-icon" id="personPhotoPreview">+</div>
+                                        <div class="logo-text-wrapper">
+                                            <span class="logo-title">Personel Fotoğrafı</span>
+                                            <a href="#" class="logo-upload-link" onclick="event.preventDefault();">Resim yükle</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ID -->
+                                <div class="form-group">
+                                    <label class="input-label">ID</label>
+                                    <input type="text" class="form-input" id="personIdInput" placeholder="1384843811">
+                                </div>
+
+                                <!-- Yetki -->
+                                <div class="form-group">
+                                    <label class="input-label">Yetki</label>
+                                    <input type="text" class="form-input" id="personRoleInput">
+                                </div>
+
+                                <!-- Ad -->
+                                <div class="form-group">
+                                    <label class="input-label">Ad</label>
+                                    <input type="text" class="form-input" id="personFirstNameInput">
+                                </div>
+
+                                <!-- Soyad -->
+                                <div class="form-group">
+                                    <label class="input-label">Soyad</label>
+                                    <input type="text" class="form-input" id="personLastNameInput">
+                                </div>
+
+                                <!-- Telefon Numarası -->
+                                <div class="form-group">
+                                    <label class="input-label">Telefon Numarası</label>
+                                    <div class="phone-input-group">
+                                        <select class="phone-country-select">
+                                            <option value="TR">TR ∨</option>
+                                        </select>
+                                        <input type="text" class="form-input" id="personPhoneInput" placeholder="+90 (555) 000-0000">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SAĞ KOLON -->
+                            <div class="modal-col">
+                                <!-- Email -->
+                                <div class="form-group input-icon-group">
+                                    <label class="input-label">Email</label>
+                                    <div class="input-with-icon">
+                                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                                        <input type="email" class="form-input" id="personEmailInput" placeholder="olivia@upu.io">
+                                    </div>
+                                </div>
+
+                                <!-- İşe Giriş Tarihi -->
+                                <div class="form-group">
+                                    <label class="input-label">İşe Giriş Tarihi</label>
+                                    <input type="date" class="form-input" id="personStartDateInput">
+                                </div>
+
+                                <!-- Upu Point -->
+                                <div class="form-group">
+                                    <label class="input-label">Upu Point</label>
+                                    <input type="text" class="form-input" id="personUpuPointInput">
+                                </div>
+
+                                <!-- Personel Toplam Maliyet -->
+                                <div class="form-group">
+                                    <label class="input-label">Personel Toplam Maliyet</label>
+                                    <input type="text" class="form-input" id="personCostInput">
+                                </div>
+
+                                <!-- Personel Toplam Maaş -->
+                                <div class="form-group">
+                                    <label class="input-label">Personel Toplam Maaş</label>
+                                    <input type="text" class="form-input" id="personSalaryInput">
+                                </div>
+
+                                <!-- Departman -->
+                                <div class="form-group">
+                                    <label class="input-label">Departman</label>
+                                    <select class="form-select" id="personDeptSelect">
+                                        <option value="">Departman Seçiniz</option>
+                                    </select>
+                                </div>
+
+                                <!-- Checkbox -->
+                                <div class="form-checkbox-group">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="personIsManagerCheckbox">
+                                        <span class="custom-checkbox-box"></span>
+                                        <span class="checkbox-label-text">Seçili departmanın sorumlusu yap*</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Alt Bilgi Yazısı -->
+                        <p class="modal-info-footnote">*Personelinizi eklediğiniz departmanın sorumlusu olarak atayabilirsiniz.</p>
+                    </div>
+
+                    <!-- TAB 2: YETENEK VE OPERASYON -->
+                    <div class="modal-tab-content" id="tab-yetenek">
+                        <div class="skills-section-header">
+                            <div class="skills-title-group">
+                                <h3 class="skills-title">Yetenekler</h3>
+                                <span class="skills-count-badge" id="skillsCountBadge">0 adet</span>
+                            </div>
+                            <button type="button" class="btn-add-skill-trigger" id="btnAddSkillTrigger">
+                                <span class="plus-sign">+</span>
+                                <span>Yetenek Ekle</span>
+                            </button>
+                        </div>
+
+                        <!-- Yetenekler Listesi -->
+                        <div class="skills-items-list" id="skillsItemsList">
+                            <!-- JS ile dinamik render edilen yetenek kartları -->
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: KAZANILMIŞ BAŞARI -->
+                    <div class="modal-tab-content" id="tab-basari">
+                        <div class="skills-section-header">
+                            <div class="skills-title-group">
+                                <h3 class="skills-title">Kazanılmış Eğitim - Başarı</h3>
+                                <span class="skills-count-badge" id="achievementsCountBadge">0 adet</span>
+                            </div>
+                            <button type="button" class="btn-add-skill-trigger" id="btnAddAchievementTrigger">
+                                <span class="plus-sign">+</span>
+                                <span>Başarı Ekle</span>
+                            </button>
+                        </div>
+
+                        <!-- Başarılar Listesi -->
+                        <div class="skills-items-list" id="achievementsItemsList">
+                            <!-- JS ile dinamik render edilen başarı kartları -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-cancel" id="cancelPersonModalBtn" data-i18n="btn_cancel">Vazgeç</button>
+                    <button type="button" class="btn-modal-submit" id="savePersonModalBtn" data-i18n="btn_save">Kaydet</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- YENİ YETENEK EKLE MODAL (Nested Sub-Modal) -->
+        <div class="modal-overlay" id="skillModal" style="z-index: 1100;">
+            <div class="modal-card" style="max-width: 380px;">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni Yetenek Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeSkillModalBtn">&times;</button>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body">
+                    <!-- Operasyon -->
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="input-label">Operasyon</label>
+                        <select class="form-select" id="skillOpSelect">
+                            <option value="">Select an operation</option>
+                            <option value="CNC Taşlama">CNC Taşlama</option>
+                            <option value="CNC Dişli">CNC Dişli</option>
+                            <option value="Torna Operasyonu">Torna Operasyonu</option>
+                            <option value="Frezeleme">Frezeleme</option>
+                            <option value="Montaj">Montaj</option>
+                        </select>
+                    </div>
+
+                    <!-- Tarih -->
+                    <div class="form-group input-icon-group" style="margin-bottom: 16px;">
+                        <label class="input-label">Tarih</label>
+                        <div class="input-with-icon">
+                            <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                            <input type="text" class="form-input" id="skillDateInput" value="16:34" placeholder="16:34">
+                        </div>
+                    </div>
+
+                    <!-- Puan -->
+                    <div class="form-group">
+                        <label class="input-label">Puan</label>
+                        <select class="form-select" id="skillScoreSelect">
+                            <option value="">Puan Seçiniz</option>
+                            <option value="1/10">1/10</option>
+                            <option value="2/10">2/10</option>
+                            <option value="3/10">3/10</option>
+                            <option value="4/10">4/10</option>
+                            <option value="5/10">5/10</option>
+                            <option value="6/10">6/10</option>
+                            <option value="7/10">7/10</option>
+                            <option value="8/10">8/10</option>
+                            <option value="9/10">9/10</option>
+                            <option value="10/10">10/10</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-cancel" id="cancelSkillModalBtn">Vazgeç</button>
+                    <button type="button" class="btn-modal-submit" id="saveSkillModalBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- YENİ KAZANILMIŞ BAŞARI EKLE MODAL (Nested 2-Column Sub-Modal) -->
+        <div class="modal-overlay" id="achievementModal" style="z-index: 1100;">
+            <div class="modal-card" style="max-width: 580px;">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni Kazanılmış Başarı Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeAchievementModalBtn">&times;</button>
+                </div>
+
+                <!-- Body (2 Column Grid) -->
+                <div class="modal-body">
+                    <div class="modal-two-column-grid">
+                        
+                        <!-- SOL KOLON -->
+                        <div class="modal-col">
+                            <!-- Başarı -->
+                            <div class="form-group">
+                                <label class="input-label">Başarı</label>
+                                <input type="text" class="form-input" id="achieveTitleInput" placeholder="Başarı Adı">
+                            </div>
+
+                            <!-- Tarih -->
+                            <div class="form-group input-icon-group">
+                                <label class="input-label">Tarih</label>
+                                <div class="input-with-icon">
+                                    <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                    <input type="text" class="form-input" id="achieveDateInput" value="16:34" placeholder="16:34">
+                                </div>
+                            </div>
+
+                            <!-- Kurum -->
+                            <div class="form-group">
+                                <label class="input-label">Kurum</label>
+                                <input type="text" class="form-input" id="achieveInstitutionInput">
+                            </div>
+
+                            <!-- Ek Belge -->
+                            <div class="form-group logo-upload-group">
+                                <div class="logo-upload-box" id="achieveFileUploadBox">
+                                    <input type="file" id="achieveFileInput" style="display: none;">
+                                    <div class="logo-plus-icon" id="achieveFilePreview">+</div>
+                                    <div class="logo-text-wrapper">
+                                        <span class="logo-title">Ek Belge</span>
+                                        <a href="#" class="logo-upload-link" onclick="event.preventDefault();">Belge yükle</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SAĞ KOLON -->
+                        <div class="modal-col">
+                            <!-- Sertifika No -->
+                            <div class="form-group">
+                                <label class="input-label">Sertifika No</label>
+                                <input type="text" class="form-input" id="achieveCertNoInput">
+                            </div>
+
+                            <!-- Alınan Puan -->
+                            <div class="form-group">
+                                <label class="input-label">Alınan Puan</label>
+                                <input type="text" class="form-input" id="achieveScoreInput">
+                            </div>
+
+                            <!-- Tam Puan -->
+                            <div class="form-group">
+                                <label class="input-label">Tam Puan</label>
+                                <input type="text" class="form-input" id="achieveMaxScoreInput">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal-cancel" id="cancelAchievementModalBtn">Vazgeç</button>
+                    <button type="button" class="btn-modal-submit" id="saveAchievementModalBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- İÇ OPERASYON EKLEME MODAL (Web Modal Base - Tabbed Form) -->
+        <div class="modal-overlay" id="internalOpModal">
+            <div class="modal-card modal-card-wide">
+                
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni İç Operasyon Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeInternalOpModalBtn">&times;</button>
+                </div>
+
+                <!-- Tab Navigasyonu -->
+                <div class="modal-tabs">
+                    <button type="button" class="modal-tab-btn active" data-tab="op-tab-info">Operasyon Bilgileri</button>
+                    <button type="button" class="modal-tab-btn" data-tab="op-tab-manager">Operasyon Sorumlusu</button>
+                    <button type="button" class="modal-tab-btn" data-tab="op-tab-icon">Operasyon İkonu</button>
+                </div>
+
+                <!-- Body Tabs Container -->
+                <div class="modal-body">
+                    
+                    <!-- TAB 1: OPERASYON BİLGİLERİ -->
+                    <div class="modal-tab-content active" id="op-tab-info">
+                        <div class="modal-two-column-grid">
+                            
+                            <!-- SOL KOLON -->
+                            <div class="modal-col">
+                                <!-- Operasyon Adı -->
+                                <div class="form-group">
+                                    <label class="input-label">Operasyon Adı</label>
+                                    <input type="text" class="form-input" id="opNameInput">
+                                </div>
+
+                                <!-- Operasyon Tipi -->
+                                <div class="form-group">
+                                    <label class="input-label">Operasyon Tipi</label>
+                                    <select class="form-select" id="opTypeSelect">
+                                        <option value="">Select an item</option>
+                                        <option value="Frezeleme">Frezeleme</option>
+                                        <option value="Tornalama">Tornalama</option>
+                                        <option value="Kesme">Kesme</option>
+                                        <option value="Kaynak">Kaynak</option>
+                                        <option value="Montaj">Montaj</option>
+                                    </select>
+                                </div>
+
+                                <!-- Operasyon Kodu -->
+                                <div class="form-group">
+                                    <label class="input-label">Operasyon Kodu</label>
+                                    <input type="text" class="form-input" id="opCodeInput" maxlength="3">
+                                    <span class="input-footnote">Maksimum 3 harf olmalı.</span>
+                                </div>
+                            </div>
+
+                            <!-- SAĞ KOLON (KPI İle Birleşik Inputlar) -->
+                            <div class="modal-col">
+                                <!-- Utilization -->
+                                <div class="form-group">
+                                    <label class="input-label">Utilization</label>
+                                    <div class="kpi-input-group">
+                                        <span class="kpi-badge">KPI</span>
+                                        <input type="number" class="form-input" id="opUtilizationInput" placeholder="12">
+                                    </div>
+                                </div>
+
+                                <!-- Measurable -->
+                                <div class="form-group">
+                                    <label class="input-label">Measurable</label>
+                                    <div class="kpi-input-group">
+                                        <span class="kpi-badge">KPI</span>
+                                        <input type="number" class="form-input" id="opMeasurableInput" placeholder="12">
+                                    </div>
+                                </div>
+
+                                <!-- Performance -->
+                                <div class="form-group">
+                                    <label class="input-label">Performance</label>
+                                    <div class="kpi-input-group">
+                                        <span class="kpi-badge">KPI</span>
+                                        <input type="number" class="form-input" id="opPerformanceInput" placeholder="12">
+                                    </div>
+                                </div>
+
+                                <!-- Availability -->
+                                <div class="form-group">
+                                    <label class="input-label">Availability</label>
+                                    <div class="kpi-input-group">
+                                        <span class="kpi-badge">KPI</span>
+                                        <input type="number" class="form-input" id="opAvailabilityInput" placeholder="12">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Footer Tab 1 -->
+                        <div class="modal-footer" style="margin-top: 24px;">
+                            <button type="button" class="btn-modal-cancel" id="cancelInternalOpModalBtn">Vazgeç</button>
+                            <button type="button" class="btn-modal-submit save-op-action-btn" id="nextTabInfoBtn">Kaydet</button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: OPERASYON SORUMLUSU -->
+                    <div class="modal-tab-content" id="op-tab-manager">
+                        <!-- Search -->
+                        <div class="dept-search-wrapper" style="margin-bottom: 16px;">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="opManagerSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- Personel Seçim Grid'i (2 Kolon) -->
+                        <div class="op-managers-grid" id="opManagersGrid">
+                            <!-- JS ile render edilen sorumlu personeller -->
+                        </div>
+
+                        <!-- Footer Tab 2 -->
+                        <div class="modal-footer" style="margin-top: 24px;">
+                            <button type="button" class="btn-modal-cancel" id="prevTabManagerBtn">Önceki</button>
+                            <button type="button" class="btn-modal-submit save-op-action-btn" id="nextTabManagerBtn">Kaydet</button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: OPERASYON İKONU -->
+                    <div class="modal-tab-content" id="op-tab-icon">
+                        <!-- Search Bar -->
+                        <div class="dept-search-wrapper" style="margin-bottom: 16px;">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="opIconSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- 11-Column Icon Picker Grid (36 adet SVG görsel) -->
+                        <div class="op-icon-picker-grid" id="opIconPickerGrid" style="display: grid; grid-template-columns: repeat(11, 1fr); gap: 8px; max-height: 240px; overflow-y: auto; padding: 4px;">
+                            <!-- JS ile render edilen SVG ikonları -->
+                        </div>
+
+                        <!-- Footer Tab 3 -->
+                        <div class="modal-footer" style="margin-top: 24px;">
+                            <button type="button" class="btn-modal-cancel" id="prevTabIconBtn">Önceki</button>
+                            <button type="button" class="btn-modal-submit save-op-action-btn" id="saveInternalOpModalBtn">Kaydet</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- DIŞ OPERASYON EKLEME MODAL (Web Modal Base - Tabbed Figma Spec) -->
+        <div class="modal-overlay" id="externalOpModal">
+            <div class="modal-card modal-card-wide">
+                
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni Dış Operasyon Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeExternalOpModalBtn">&times;</button>
+                </div>
+
+                <!-- Tab Navigasyonu -->
+                <div class="modal-tabs">
+                    <button type="button" class="modal-tab-btn active" data-tab="ext-tab-info">Operasyon Bilgileri</button>
+                    <button type="button" class="modal-tab-btn" data-tab="ext-tab-manager">Operasyon Sorumlusu</button>
+                </div>
+
+                <!-- Body Tabs Container -->
+                <div class="modal-body">
+                    
+                    <!-- TAB 1: OPERASYON BİLGİLERİ -->
+                    <div class="modal-tab-content active" id="ext-tab-info">
+                        
+                        <!-- Dış Operasyon Adı -->
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label class="input-label">Dış Operasyon Adı</label>
+                            <input type="text" class="form-input" id="extOpNameInput" placeholder="Operasyon Adı">
+                        </div>
+
+                        <!-- Tedarikçiler Header Row -->
+                        <div class="suppliers-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <label class="input-label" style="margin-bottom: 0;">Tedarikçiler</label>
+                                <span class="dept-count-badge" id="supplierCountBadge">6 adet</span>
+                            </div>
+                            <button type="button" class="btn-link-action" id="btnOpenNewSupplierModal" style="background: none; border: none; color: #7F56D9; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                <span>+</span>
+                                <span>Yeni Tedarikçi Ekle</span>
+                            </button>
+                        </div>
+
+                        <!-- Tedarikçiler 2-Column Grid -->
+                        <div class="suppliers-grid" id="suppliersGrid">
+                            <!-- JS ile render edilen 2 kolonlu tedarikçi listesi -->
+                        </div>
+
+                        <!-- Footer Tab 1 -->
+                        <div class="modal-footer" style="margin-top: 24px;">
+                            <button type="button" class="btn-modal-cancel" id="cancelExternalOpModalBtn">Vazgeç</button>
+                            <button type="button" class="btn-modal-submit" id="nextExtTabInfoBtn">Sonraki</button>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB 2: OPERASYON SORUMLUSU -->
+                    <div class="modal-tab-content" id="ext-tab-manager">
+                        <!-- Search -->
+                        <div class="dept-search-wrapper" style="margin-bottom: 16px;">
+                            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="dept-search-input" id="extOpManagerSearchInput" placeholder="Search">
+                        </div>
+
+                        <!-- Personel Seçim Grid'i (2 Kolon) -->
+                        <div class="op-managers-grid" id="extOpManagersGrid">
+                            <!-- JS ile render edilen sorumlu personeller -->
+                        </div>
+
+                        <!-- Footer Tab 2 -->
+                        <div class="modal-footer" style="margin-top: 24px;">
+                            <button type="button" class="btn-modal-cancel" id="prevExtTabManagerBtn">Önceki</button>
+                            <button type="button" class="btn-modal-submit" id="saveExternalOpModalBtn">Kaydet</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- YENİ TEDARİKÇİ EKLEME MODAL (Web Modal Base - Figma Right Modal Spec) -->
+        <div class="modal-overlay" id="newSupplierModal" style="z-index: 1050;">
+            <div class="modal-card" style="max-width: 440px;">
+                
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni Tedarikçi Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeNewSupplierModalBtn">&times;</button>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body" style="gap: 16px;">
+                    <!-- Tedarikçi Adı -->
+                    <div class="form-group">
+                        <label class="input-label">Tedarikçi Adı</label>
+                        <input type="text" class="form-input" id="supplierNameInput" placeholder="Tedarikçi Adı">
+                    </div>
+
+                    <!-- Adres -->
+                    <div class="form-group">
+                        <label class="input-label">Adres</label>
+                        <input type="text" class="form-input" id="supplierAddressInput" placeholder="Adres">
+                    </div>
+
+                    <!-- İrtibat Numarası -->
+                    <div class="form-group">
+                        <label class="input-label">İrtibat Numarası</label>
+                        <div class="phone-input-row" style="display: flex; gap: 8px;">
+                            <select class="form-input" id="supplierCountryCode" style="width: 110px; flex-shrink: 0;">
+                                <option value="TR">TR ∨ +(90)</option>
+                                <option value="US">US ∨ +(1)</option>
+                                <option value="GB">GB ∨ +(44)</option>
+                                <option value="DE">DE ∨ +(49)</option>
+                            </select>
+                            <input type="tel" class="form-input" id="supplierPhoneInput" placeholder="5xx xxx xx xx" style="flex: 1;">
+                        </div>
+                    </div>
+
+                    <!-- E-Posta -->
+                    <div class="form-group input-icon-group">
+                        <label class="input-label">E-Posta</label>
+                        <div class="input-with-icon">
+                            <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <input type="email" class="form-input" id="supplierEmailInput" placeholder="upu@upu.io">
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer" style="margin-top: 24px;">
+                        <button type="button" class="btn-modal-cancel" id="cancelNewSupplierModalBtn">Vazgeç</button>
+                        <button type="button" class="btn-modal-submit" id="saveNewSupplierModalBtn">Kaydet</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- EKİPMAN EKLEME MODAL (Web Modal Base - Figma 2-Column Spec) -->
+        <div class="modal-overlay" id="equipmentModal">
+            <div class="modal-card modal-card-wide" style="max-width: 680px; padding: 24px;">
+                
+                <!-- Header -->
+                <div class="modal-header" style="margin-bottom: 20px;">
+                    <h2 class="modal-title">Yeni Ekipman Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeEquipmentModalBtn">&times;</button>
+                </div>
+
+                <!-- Body (2-Column Grid) -->
+                <div class="modal-body">
+                    <div class="modal-two-column-grid" style="grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+                        
+                        <!-- LEFT COLUMN -->
+                        <div class="modal-col" style="display: flex; flex-direction: column; gap: 14px;">
+                            
+                            <!-- Ekipman Fotoğrafı Upload Box -->
+                            <div class="photo-upload-box-row" style="display: flex; align-items: center; gap: 14px; margin-bottom: 4px;">
+                                <input type="file" id="eqPhotoFileInput" accept="image/*" style="display: none;">
+                                <div id="eqPhotoPreviewBox" onclick="document.getElementById('eqPhotoFileInput').click()" style="width: 52px; height: 52px; border: 1px dashed #D0D5DD; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #FAFAFA; transition: border-color 0.15s; overflow: hidden;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                </div>
+                                <div>
+                                    <div style="font-size: 14px; font-weight: 600; color: #101828;">Ekipman Fotoğrafı</div>
+                                    <span onclick="document.getElementById('eqPhotoFileInput').click()" style="font-size: 13px; color: #7F56D9; text-decoration: underline; cursor: pointer;">Resim yükle</span>
+                                </div>
+                            </div>
+
+                            <!-- ID -->
+                            <div class="form-group">
+                                <label class="input-label">ID</label>
+                                <input type="text" class="form-input" id="eqIdInput" value="1384843811" readonly style="background-color: #F9FAFB;">
+                            </div>
+
+                            <!-- Marka -->
+                            <div class="form-group">
+                                <label class="input-label">Marka</label>
+                                <input type="text" class="form-input" id="eqBrandInput" placeholder="Marka">
+                            </div>
+
+                            <!-- Model -->
+                            <div class="form-group">
+                                <label class="input-label">Model</label>
+                                <input type="text" class="form-input" id="eqModelInput" placeholder="Model">
+                            </div>
+
+                            <!-- Operasyon -->
+                            <div class="form-group">
+                                <label class="input-label">Operasyon</label>
+                                <select class="form-input" id="eqOperationSelect">
+                                    <option value="">Operasyon Seçiniz</option>
+                                    <option value="CNC Torna">CNC Torna</option>
+                                    <option value="CNC Freze">CNC Freze</option>
+                                    <option value="Kesim">Kesim</option>
+                                    <option value="Kaynak">Kaynak</option>
+                                </select>
+                            </div>
+
+                            <!-- Mac Adresi -->
+                            <div class="form-group">
+                                <label class="input-label">Mac Adresi</label>
+                                <input type="text" class="form-input" id="eqMacInput" placeholder="Mac Adresi">
+                            </div>
+
+                            <!-- Üretim Yılı -->
+                            <div class="form-group">
+                                <label class="input-label">Üretim Yılı</label>
+                                <input type="text" class="form-input" id="eqYearInput" placeholder="Üretim Yılı">
+                            </div>
+
+                            <!-- Amort Oranı & Puantaj Katsayısı -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="form-group">
+                                    <label class="input-label">Amort Oranı</label>
+                                    <input type="text" class="form-input" id="eqAmortInput">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-label">Puantaj Katsayısı</label>
+                                    <input type="text" class="form-input" id="eqScoreInput">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT COLUMN -->
+                        <div class="modal-col" style="display: flex; flex-direction: column; gap: 14px;">
+                            
+                            <!-- Güncel Değeri & Dk Maliyet -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="form-group">
+                                    <label class="input-label">Güncel Değeri</label>
+                                    <input type="text" class="form-input" id="eqValuationInput">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-label">Dk Maliyet</label>
+                                    <input type="text" class="form-input" id="eqMinCostInput">
+                                </div>
+                            </div>
+
+                            <!-- Çalışacak Kişi Sayısı & Sıra No -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="form-group">
+                                    <label class="input-label">Çalışacak Kişi Sayısı</label>
+                                    <input type="text" class="form-input" id="eqWorkerCountInput">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-label">Sıra No</label>
+                                    <input type="text" class="form-input" id="eqOrderNoInput">
+                                </div>
+                            </div>
+
+                            <!-- Faydalı Ömür -->
+                            <div class="form-group">
+                                <label class="input-label">Faydalı Ömür</label>
+                                <input type="text" class="form-input" id="eqLifespanInput">
+                            </div>
+
+                            <!-- Çalışma Toleransı -->
+                            <div class="form-group">
+                                <label class="input-label">Çalışma Toleransı</label>
+                                <input type="text" class="form-input" id="eqToleranceInput">
+                            </div>
+
+                            <!-- Utilization (KPI 12) -->
+                            <div class="form-group">
+                                <label class="input-label">Utilization</label>
+                                <div class="kpi-input-wrapper" style="display: flex; border: 1px solid #D0D5DD; border-radius: 8px; overflow: hidden;">
+                                    <span style="background-color: #F9FAFB; color: #667085; font-size: 13px; font-weight: 600; padding: 10px 14px; border-right: 1px solid #D0D5DD;">KPI</span>
+                                    <input type="text" class="form-input" id="eqUtilizationInput" value="12" style="border: none; border-radius: 0;">
+                                </div>
+                            </div>
+
+                            <!-- Measurable (KPI 12) -->
+                            <div class="form-group">
+                                <label class="input-label">Measurable</label>
+                                <div class="kpi-input-wrapper" style="display: flex; border: 1px solid #D0D5DD; border-radius: 8px; overflow: hidden;">
+                                    <span style="background-color: #F9FAFB; color: #667085; font-size: 13px; font-weight: 600; padding: 10px 14px; border-right: 1px solid #D0D5DD;">KPI</span>
+                                    <input type="text" class="form-input" id="eqMeasurableInput" value="12" style="border: none; border-radius: 0;">
+                                </div>
+                            </div>
+
+                            <!-- Performance (KPI 12) -->
+                            <div class="form-group">
+                                <label class="input-label">Performance</label>
+                                <div class="kpi-input-wrapper" style="display: flex; border: 1px solid #D0D5DD; border-radius: 8px; overflow: hidden;">
+                                    <span style="background-color: #F9FAFB; color: #667085; font-size: 13px; font-weight: 600; padding: 10px 14px; border-right: 1px solid #D0D5DD;">KPI</span>
+                                    <input type="text" class="form-input" id="eqPerformanceInput" value="12" style="border: none; border-radius: 0;">
+                                </div>
+                            </div>
+
+                            <!-- Availability (KPI 12) -->
+                            <div class="form-group">
+                                <label class="input-label">Availability</label>
+                                <div class="kpi-input-wrapper" style="display: flex; border: 1px solid #D0D5DD; border-radius: 8px; overflow: hidden;">
+                                    <span style="background-color: #F9FAFB; color: #667085; font-size: 13px; font-weight: 600; padding: 10px 14px; border-right: 1px solid #D0D5DD;">KPI</span>
+                                    <input type="text" class="form-input" id="eqAvailabilityInput" value="12" style="border: none; border-radius: 0;">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%;">
+                        <button type="button" class="btn-modal-cancel" id="cancelEquipmentModalBtn">Vazgeç</button>
+                        <button type="button" class="btn-modal-submit" id="saveEquipmentModalBtn">Kaydet</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- YENİ VARDİYA EKLEME MODAL (Web Modal Base - Figma Spec) -->
+        <div class="modal-overlay" id="shiftModal">
+            <div class="modal-card modal-card-wide" style="max-width: 680px; padding: 24px;">
+                
+                <!-- Header -->
+                <div class="modal-header" style="margin-bottom: 16px;">
+                    <h2 class="modal-title">Yeni Vardiya Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeShiftModalBtn">&times;</button>
+                </div>
+
+                <!-- Nav Tabs -->
+                <div class="modal-tabs" style="display: flex; border-bottom: 1px solid #EAECF0; margin-bottom: 20px;">
+                    <button type="button" class="modal-tab-btn active" id="shiftTabInfoBtn" style="padding: 10px 16px; border-bottom: 2px solid #7F56D9; color: #7F56D9; font-weight: 600; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer;">Vardiya Bilgileri</button>
+                    <button type="button" class="modal-tab-btn" id="shiftTabBreakBtn" style="padding: 10px 16px; border-bottom: 2px solid transparent; color: #667085; font-weight: 500; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer;">Molalar</button>
+                </div>
+
+                <!-- Body Container -->
+                <div class="modal-body">
+                    
+                    <!-- TAB 1: VARDIYA BILGILERI -->
+                    <div class="modal-tab-content active" id="shift-tab-info">
+                        <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; align-items: start;">
+                            
+                            <!-- LEFT COLUMN: VARDIYA INPUTS -->
+                            <div style="display: flex; flex-direction: column; gap: 14px;">
+                                
+                                <!-- Vardiya Adı -->
+                                <div class="form-group">
+                                    <label class="input-label">Vardiya Adı</label>
+                                    <input type="text" class="form-input" id="shiftNameInput" placeholder="Vardiya Adı">
+                                </div>
+
+                                <!-- Başlangıç Saati -->
+                                <div class="form-group">
+                                    <label class="input-label">Başlangıç Saati</label>
+                                    <div class="input-with-icon" style="position: relative;">
+                                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <input type="text" class="form-input" id="shiftStartTimeInput" value="16:34" style="padding-left: 38px;">
+                                    </div>
+                                </div>
+
+                                <!-- Bitiş Saati -->
+                                <div class="form-group">
+                                    <label class="input-label">Bitiş Saati</label>
+                                    <div class="input-with-icon" style="position: relative;">
+                                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <input type="text" class="form-input" id="shiftEndTimeInput" value="16:34" style="padding-left: 38px;">
+                                    </div>
+                                </div>
+
+                                <!-- Vardiya Sorumlusu -->
+                                <div class="form-group">
+                                    <label class="input-label">Vardiya Sorumlusu</label>
+                                    <select class="form-input" id="shiftManagerSelect">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <!-- MIDDLE COLUMN: VARDIYA TEKRARI -->
+                            <div style="border: 1px solid #EAECF0; border-radius: 8px; padding: 14px; background: #FFFFFF;">
+                                <div style="font-size: 14px; font-weight: 600; color: #101828; margin-bottom: 12px;">Vardiya Tekrarı</div>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Pazartesi" checked style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Pazartesi</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Salı" checked style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Salı</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Çarşamba" style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Çarşamba</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Perşembe" style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Perşembe</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Cuma" style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Cuma</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Cumartesi" style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Cumartesi</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="checkbox" name="shiftRepeatDays" value="Pazar" style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span>Pazar</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT COLUMN: TAKVİM RENGİ -->
+                            <div style="border: 1px solid #EAECF0; border-radius: 8px; padding: 14px; background: #FFFFFF;">
+                                <div style="font-size: 14px; font-weight: 600; color: #101828; margin-bottom: 12px;">Takvim Rengi</div>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="radio" name="shiftCalendarColor" value="mor" style="accent-color: #7F56D9; width: 16px; height: 16px;">
+                                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #F4F3FF; border: 1px solid #7F56D9;"></span>
+                                        <span>Mor</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="radio" name="shiftCalendarColor" value="gri" style="accent-color: #667085; width: 16px; height: 16px;">
+                                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #F2F4F7; border: 1px solid #667085;"></span>
+                                        <span>Gri</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="radio" name="shiftCalendarColor" value="kırmızı" checked style="accent-color: #D9381E; width: 16px; height: 16px;">
+                                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #FEF3F2; border: 1px solid #D9381E;"></span>
+                                        <span>Kırmızı</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="radio" name="shiftCalendarColor" value="turuncu" style="accent-color: #F79009; width: 16px; height: 16px;">
+                                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #FEF0C7; border: 1px solid #F79009;"></span>
+                                        <span>Turuncu</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="radio" name="shiftCalendarColor" value="yeşil" style="accent-color: #12B76A; width: 16px; height: 16px;">
+                                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #D1FADF; border: 1px solid #12B76A;"></span>
+                                        <span>Yeşil</span>
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #344054; cursor: pointer;">
+                                        <input type="radio" name="shiftCalendarColor" value="mavi" style="accent-color: #2E90FA; width: 16px; height: 16px;">
+                                        <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #D1E9FF; border: 1px solid #2E90FA;"></span>
+                                        <span>Mavi</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Footer Tab 1 -->
+                        <div class="modal-footer" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%;">
+                            <button type="button" class="btn-modal-cancel" id="cancelShiftModalBtn">Vazgeç</button>
+                            <button type="button" class="btn-modal-submit" id="nextShiftTabBtn">Sonraki</button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: MOLALAR (Figma Spec) -->
+                    <div class="modal-tab-content" id="shift-tab-break" style="display: none;">
+                        
+                        <!-- Header with count badge & + Yeni Mola Ekle button -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h3 style="font-size: 15px; font-weight: 700; color: #101828; margin: 0;">Molalar</h3>
+                                <span id="breakCountBadge" style="padding: 2px 8px; border-radius: 12px; background: #F4F3FF; color: #7F56D9; font-size: 12px; font-weight: 600;">3 adet</span>
+                            </div>
+                            <button type="button" id="btnOpenNewBreakModal" onclick="window.openBreakModal()" style="background: none; border: none; color: #7F56D9; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                <span style="font-size: 16px; pointer-events: none;">+</span>
+                                <span style="pointer-events: none;">Yeni Mola Ekle</span>
+                            </button>
+                        </div>
+
+                        <!-- 2 Kolonlu Mola Listesi Container -->
+                        <div id="breaksListContainer" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; min-height: 180px; align-content: start;">
+                            <!-- JS ile Dinamik Render Edilir (Çay Molası Sabah, Çay Molası Öğleden Sonra, Yemek Molası vb.) -->
+                        </div>
+
+                        <!-- Footer Tab 2 -->
+                        <div class="modal-footer" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%;">
+                            <button type="button" class="btn-modal-cancel" id="cancelShiftModalBtn2">Vazgeç</button>
+                            <button type="button" class="btn-modal-submit" id="saveShiftModalBtn">Sonraki</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- YENİ MOLA EKLEME MODAL (Figma Spec - Secondary Modal) -->
+        <div class="modal-overlay" id="newBreakModal" style="z-index: 1050;">
+            <div class="modal-card" style="max-width: 400px; padding: 24px;">
+                <div class="modal-header" style="margin-bottom: 16px;">
+                    <h2 class="modal-title" id="breakModalTitle">Yeni Mola Ekle</h2>
+                    <button type="button" class="modal-close-btn" id="closeBreakModalBtn">&times;</button>
+                </div>
+
+                <div class="modal-body" style="display: flex; flex-direction: column; gap: 14px;">
+                    <!-- Mola Adı -->
+                    <div class="form-group">
+                        <label class="input-label">Mola Adı</label>
+                        <input type="text" class="form-input" id="breakNameInput" placeholder="Mola Adı">
+                    </div>
+
+                    <!-- Başlangıç Saati -->
+                    <div class="form-group">
+                        <label class="input-label">Başlangıç Saati</label>
+                        <div class="input-with-icon" style="position: relative;">
+                            <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <input type="text" class="form-input" id="breakStartTimeInput" value="16:34" style="padding-left: 38px;">
+                        </div>
+                    </div>
+
+                    <!-- Bitiş Saati -->
+                    <div class="form-group">
+                        <label class="input-label">Bitiş Saati</label>
+                        <div class="input-with-icon" style="position: relative;">
+                            <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <input type="text" class="form-input" id="breakEndTimeInput" value="16:34" style="padding-left: 38px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%;">
+                    <button type="button" class="btn-modal-cancel" id="cancelBreakModalBtn">Vazgeç</button>
+                    <button type="button" class="btn-modal-submit" id="saveBreakModalBtn">Kaydet</button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Custom JavaScript -->
-    <script src="register.js"></script>
+    <script src="register.js?v=1010"></script>
 </body>
 </html>
