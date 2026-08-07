@@ -2526,6 +2526,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSkills();
     renderAchievements();
     renderShifts();
-    goToStep(9);
+    goToStep(1);
 
 });
